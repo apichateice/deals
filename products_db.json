@@ -1,0 +1,225 @@
+{
+  "groups": [
+    {
+      "key": "newest_20260425",
+      "mode": "newest",
+      "title": "5 สินค้ามาใหม่",
+      "keyword": "สินค้าใหม่",
+      "date": "25/04/2026",
+      "updated": "2026-04-25T15:33:28.227891",
+      "products": [
+        {
+          "rank": 1,
+          "name": "MOMO Cat โมโม่ แคท อาหารแมว ขนาด 7 Kg. 14 kg.และ",
+          "price_str": "฿315",
+          "price": 315.0,
+          "sold": "ขายแล้ว 1หมื่นกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5368671414.html",
+          "image": "images/item_5368671414.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "TWS รุ่นใหม่ทนกว่าเดิม หูฟังบลูทูธ",
+          "price_str": "฿51",
+          "price": 50.98,
+          "sold": "ขายแล้ว 1แสนชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5510033058.html",
+          "image": "images/item_5510033058.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "Muse Harbor เสื้อกล้ามผู้ชายฤดูร้อนระบายอากาศกีฬาฟ",
+          "price_str": "฿17",
+          "price": 16.8,
+          "sold": "ขายแล้ว 1แสนชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5643187878.html",
+          "image": "images/item_5643187878.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "DEESTONE ยางรถยนต์ รุ่น R702 4 เส้น",
+          "price_str": "฿6,120",
+          "price": 6120.0,
+          "sold": "ขายแล้ว 2พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i140923404.html",
+          "image": "images/item_140923404.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "Janet เก้าอี้พับ Kermit chair Top Sun",
+          "price_str": "฿450",
+          "price": 450.0,
+          "sold": "ขายแล้ว 2พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5627269694.html",
+          "image": "images/item_5627269694.jpg"
+        }
+      ]
+    },
+    {
+      "key": "limited_20260425",
+      "mode": "limited",
+      "title": "5 ของลิมิเต็ดที่น่าสะสม",
+      "keyword": "ลิมิเต็ด",
+      "date": "25/04/2026",
+      "updated": "2026-04-25T15:29:20.051748",
+      "products": [
+        {
+          "rank": 1,
+          "name": "เฟืองท้ายเต็ด ลิมิเต็ด ดีแม็ก ISUZU D-max 11x41",
+          "price_str": "฿11,529",
+          "price": 11528.63,
+          "sold": "ขายแล้วหกชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i2066902640.html",
+          "image": "images/item_2066902640.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "ลิมิเต็ดสลิป ISUZU D-MAX ดีแม็ค คอมมอลเรล",
+          "price_str": "฿5,495",
+          "price": 5495.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5909451563.html",
+          "image": "images/item_5909451563.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "ดอกจอกลิมิเต็ด ฟอร์ด WL 12วาล์ว เรนเจอร์ ไฟเตอร์",
+          "price_str": "฿4,655",
+          "price": 4655.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i6043609748.html",
+          "image": "images/item_6043609748.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "Crocs Zootopia Clog Clog",
+          "price_str": "฿4,360",
+          "price": 4360.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i6003929685.html",
+          "image": "images/item_6003929685.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "Joma รองเท้าฟุตซอลในร่มพื้นยาง",
+          "price_str": "฿3,800",
+          "price": 3800.16,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i6011084251.html",
+          "image": "images/item_6011084251.jpg"
+        }
+      ]
+    },
+    {
+      "key": "collectible_20260425",
+      "mode": "collectible",
+      "title": "5 ของสะสมสุดเจ๋ง",
+      "keyword": "ของสะสม",
+      "date": "25/04/2026",
+      "updated": "2026-04-25T15:25:28.734455",
+      "products": [
+        {
+          "rank": 1,
+          "name": "Bandai MEGAHOUSE PORTRAIT.OF.PIRATES ONE PIECE",
+          "price_str": "฿9,560",
+          "price": 9560.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5841841979.html",
+          "image": "images/item_5841841979.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "Bandai TAMASHII S.H.MONSTERARTS SHIMO FROM",
+          "price_str": "฿5,779",
+          "price": 5779.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5586480865.html",
+          "image": "images/item_5586480865.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "One Piece Luffy Action Figure 60CM",
+          "price_str": "฿4,598",
+          "price": 4598.0,
+          "sold": "ขายแล้วหนึ่งร้อยแปดสิบเจ็ดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5720580908.html",
+          "image": "images/item_5720580908.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "วันพีชชุดหนวดขาว ของแท้ โมเดลของสะสม Onepiece",
+          "price_str": "฿3,390",
+          "price": 3390.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i6062402181.html",
+          "image": "images/item_6062402181.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "Maisto 1:18 2021 Ford Bronco Wildtrak โมเดลรถยนต์",
+          "price_str": "฿1,899",
+          "price": 1899.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i4170069361.html",
+          "image": "images/item_4170069361.jpg"
+        }
+      ]
+    },
+    {
+      "key": "cheapest_20260425",
+      "mode": "cheapest",
+      "title": "5 สินค้าราคาถูกสุด",
+      "keyword": "ราคาถูก",
+      "date": "25/04/2026",
+      "updated": "2026-04-25T15:21:06.518985",
+      "products": [
+        {
+          "rank": 1,
+          "name": "กระดาษทิชชูพกพา 210 แผ่น/ห่อ 4ชั้น",
+          "price_str": "฿4",
+          "price": 4.0,
+          "sold": "ขายแล้ว 3พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5226318355.html",
+          "image": "images/item_5226318355.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "มาม่า ส่งไว พร้อมส่ง บะหมี่กึ่งสำเร็จรูป",
+          "price_str": "฿9",
+          "price": 9.0,
+          "sold": "ขายแล้ว 1หมื่นกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4234951320.html",
+          "image": "images/item_4234951320.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "ขายดีที่สุดน้ำหอม ขนาดพกพา ทดลอง 2มล Perfumes",
+          "price_str": "฿10",
+          "price": 9.9,
+          "sold": "ขายแล้ว 1แสนชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5378833212.html",
+          "image": "images/item_5378833212.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "Muse Harbor เสื้อกล้ามผู้ชายฤดูร้อนระบายอากาศกีฬาฟ",
+          "price_str": "฿17",
+          "price": 16.8,
+          "sold": "ขายแล้ว 1แสนชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5643187878.html",
+          "image": "images/item_5643187878.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "Muse Harbor เสื้อยืดผู้ชายแขนสั้นผ้าไหมไอซ์ฤดูร้อน",
+          "price_str": "฿28",
+          "price": 28.0,
+          "sold": "ขายแล้ว 1หมื่นกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5694627751.html",
+          "image": "images/item_5694627751.jpg"
+        }
+      ]
+    }
+  ],
+  "updated": "2026-04-25T15:33:28.227969"
+}
