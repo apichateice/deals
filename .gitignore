@@ -1,0 +1,4 @@
+# ไม่ push รูปเก่าเกิน 500 ไฟล์ ป้องกัน repo ใหญ่เกิน
+# (images/ push ได้ปกติ แค่ exclude temp files)
+*.DS_Store
+*.tmp

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🛒 สินค้าแนะนำ Lazada ประจำวัน</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f1a;
+      --card: #1a1a2e;
+      --card2: #16213e;
+      --accent: #ff4444;
+      --text: #f0f0f0;
+      --sub: #a0a0b0;
+      --border: #2a2a3e;
+      --radius: 16px;
+    }
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 16px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .logo { font-size: 22px; font-weight: 800; color: var(--accent); }
+    .updated { font-size: 12px; color: var(--sub); }
+
+    /* ── Search ── */
+    .search-bar {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 12px 44px 12px 16px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Sarabun', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .search-bar input:focus { border-color: var(--accent); }
+    .search-bar .icon {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      font-size: 18px; pointer-events: none;
+    }
+
+    /* ── Filter tabs ── */
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .filter-tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      flex-shrink: 0;
+      padding: 6px 14px;
+      border-radius: 50px;
+      border: 1.5px solid var(--border);
+      background: transparent;
+      color: var(--sub);
+      font-family: 'Sarabun', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .tab:hover { border-color: #555; color: var(--text); }
+    .tab.active { border-color: var(--accent); color: var(--accent); background: rgba(255,68,68,.12); }
+
+    /* ── Main content ── */
+    .main { max-width: 1200px; margin: 0 auto; padding: 20px 12px 40px; }
+
+    /* ── Group section ── */
+    .group { margin-bottom: 40px; }
+    .group-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+    .group-emoji { font-size: 28px; }
+    .group-title { font-size: 20px; font-weight: 800; }
+    .group-meta { margin-left: auto; font-size: 12px; color: var(--sub); text-align: right; }
+    .group-keyword {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(255,255,255,.08);
+      color: var(--sub);
+    }
+
+    /* ── Product grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+    }
+    @media(min-width: 640px) { .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; } }
+    @media(min-width: 1024px) { .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
+
+    /* ── Product card ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,.4);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      background: #1e1e30;
+      display: block;
+    }
+    .card-img.error {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+    }
+    .rank-badge {
+      position: absolute;
+      top: 8px; left: 8px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800;
+      color: #fff;
+      background: var(--accent);
+      box-shadow: 0 2px 8px rgba(0,0,0,.4);
+    }
+    .card-body {
+      padding: 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .card-name {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      color: var(--text);
+    }
+    .card-price {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .card-sold {
+      font-size: 11px;
+      color: var(--sub);
+    }
+    .card-btn {
+      margin-top: auto;
+      display: block;
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Sarabun', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s, opacity .2s;
+    }
+    .card-btn:hover { opacity: .85; }
+    .card-btn.no-link {
+      background: var(--border);
+      color: var(--sub);
+      cursor: default;
+    }
+
+    /* ── Empty state ── */
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--sub);
+      font-size: 16px;
+    }
+    .empty-icon { font-size: 48px; margin-bottom: 12px; }
+
+    /* ── No results ── */
+    #no-results {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      color: var(--sub);
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div class="logo">🛒 ดีลประจำวัน</div>
+    <div class="updated">อัปเดต 25/04/2026 14:45</div>
+  </div>
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="ค้นหาสินค้า เช่น กระดาษ, iPhone..." oninput="filterAll()">
+    <span class="icon">🔍</span>
+  </div>
+  <div class="filter-tabs" id="tabs">
+    <button class="tab active" onclick="filterMode('all', this)">ทั้งหมด</button>
+  </div>
+</div>
+
+<div class="main" id="main">
+  <div class="empty">
+    <div class="empty-icon">📦</div>
+    <div>ยังไม่มีสินค้า — รัน generate-all เพื่อเพิ่มข้อมูล</div>
+  </div>
+</div>
+<div id="no-results">
+  <div style="font-size:40px">🔍</div>
+  <div>ไม่พบสินค้าที่ค้นหา</div>
+</div>
+
+<script>
+const GROUPS = [{"key": "cheapest_20260425", "mode": "cheapest", "title": "5 สินค้าราคาถูกสุด", "keyword": "ราคาถูก", "date": "25/04/2026", "updated": "2026-04-25T14:45:54.574471", "products": [{"rank": 1, "name": "มาม่า ส่งไว พร้อมส่ง บะหมี่กึ่งสำเร็จรูป", "price_str": "฿9", "price": 9.0, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4234951320.html", "image": "images/item_4234951320.jpg"}, {"rank": 2, "name": "Aqrau รองเท้าแตะชาย 544", "price_str": "฿29", "price": 29.41, "sold": "ขายแล้วแปดร้อยเจ็ดสิบเจ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5838527747.html", "image": "images/item_5838527747.jpg"}, {"rank": 3, "name": "ราคาถูกสุด นาฬิกาข้อมือดิจิตอล นาฬิกาผู้หญิง", "price_str": "฿32", "price": 32.44, "sold": "ขายแล้วหกร้อยห้าสิบสามชิ้น", "url": "https://www.lazada.co.th/products/pdp-i1826794445.html", "image": "images/item_1826794445.jpg"}, {"rank": 4, "name": "FF=1323 กางเกงขาสั้นแฟชั่นเกาหลี เนื้อผ้านิ่ม", "price_str": "฿35", "price": 35.0, "sold": "ขายแล้วห้าร้อยห้าสิบเอ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5854483415.html", "image": "images/item_5854483415.jpg"}, {"rank": 5, "name": "ซื่อสัตย์ บะหมี่ซองรสต้มยำกุ้ง แพ็ค 6", "price_str": "฿35", "price": 35.0, "sold": "ขายแล้ว 5พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i270949246.html", "image": "images/item_270949246.jpg"}]}, {"key": "newest_20260425", "mode": "newest", "title": "5 สินค้ามาใหม่", "keyword": "เทคโนโลยี", "date": "25/04/2026", "updated": "2026-04-25T14:39:14.918494", "products": [{"rank": 1, "name": "Muse Harbor เสื้อกล้ามผู้ชายฤ…", "price_str": "฿17", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5643187878.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 2, "name": "14pcs Cosmetics Makeup Set Ey…", "price_str": "฿5", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5421014309.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 3, "name": "Janet เก้าอี้พับ Kermit chair…", "price_str": "฿450", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5627269694.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 4, "name": "รองเท้าแตะ รองเท้าแตะ 2026ใส่…", "price_str": "฿59", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5889067133.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 5, "name": "JIANGZHIB ชุดแต่งหน้า 14 ชิ้น…", "price_str": "฿75", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5568959298.html?t=p-i5WHa7P-sNKs264", "image": ""}]}, {"key": "limited_20260425", "mode": "limited", "title": "5 ของลิมิเต็ดที่น่าสะสม", "keyword": "ของขวัญ limited", "date": "25/04/2026", "updated": "2026-04-25T14:39:14.917294", "products": [{"rank": 1, "name": "เฟืองท้ายเต็ด ลิมิเต็ด ดีแม็ก…", "price_str": "฿11,529", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i2066902640.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 2, "name": "เฟืองท้าย ลิมิเต็ดสลิป โตโยต้…", "price_str": "฿6,490", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5337891387.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 3, "name": "ลิมิเต็ดสลิป ISUZU D-MAX ดีแม…", "price_str": "฿5,495", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5909451563.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 4, "name": "ดอกจอกลิมิเต็ด ฟอร์ด WL 12วาล…", "price_str": "฿4,655", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i6043609748.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 5, "name": "Crocs Zootopia Clog Clog", "price_str": "฿4,360", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i6003929685.html?t=p-i5WHa7P-sNKs264", "image": ""}]}, {"key": "collectible_20260425", "mode": "collectible", "title": "5 ของสะสมสุดเจ๋ง", "keyword": "โมเดล pokemon", "date": "25/04/2026", "updated": "2026-04-25T14:39:14.916234", "products": [{"rank": 1, "name": "Bandai MEGAHOUSE PORTRAIT.OF.…", "price_str": "฿9,560", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5841841979.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 2, "name": "Bandai TAMASHII S.H.MONSTERAR…", "price_str": "฿5,779", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5586480865.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 3, "name": "Wheels Red Line Club 2024 Sel…", "price_str": "฿3,990", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5913535662.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 4, "name": "วันพีชชุดหนวดขาว ของแท้ โมเดล…", "price_str": "฿3,390", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i6062402181.html?t=p-i5WHa7P-sNKs264", "image": ""}, {"rank": 5, "name": "Ferrari DAYTONA SP3 1:18 โมเด…", "price_str": "฿2,499", "price": 0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5501312654.html?t=p-i5WHa7P-sNKs264", "image": ""}]}];
+const MODE_META = {"bestseller": {"emoji": "🔥", "label": "ขายดีอันดับต้น", "color": "#ff4444"}, "cheapest": {"emoji": "💸", "label": "ราคาถูกสุด", "color": "#00b894"}, "expensive": {"emoji": "✨", "label": "พรีเมียม", "color": "#fdcb6e"}, "toprated": {"emoji": "⭐", "label": "คะแนนดีสุด", "color": "#a29bfe"}, "newest": {"emoji": "🆕", "label": "มาใหม่ล่าสุด", "color": "#00cec9"}, "collectible": {"emoji": "🎖️", "label": "ของสะสมสุดเจ๋ง", "color": "#e17055"}, "limited": {"emoji": "🔖", "label": "ของลิมิเต็ด", "color": "#6c5ce7"}, "health": {"emoji": "💊", "label": "สุขภาพแนะนำ", "color": "#55efc4"}, "gadget": {"emoji": "🤖", "label": "แกดเจ็ตน่าซื้อ", "color": "#74b9ff"}, "beauty": {"emoji": "💄", "label": "ของแต่งหน้าขายดี", "color": "#fd79a8"}, "home": {"emoji": "🏠", "label": "ของแต่งบ้านสุดคุ้ม", "color": "#81ecec"}, "pet": {"emoji": "🐾", "label": "สัตว์เลี้ยงแนะนำ", "color": "#fab1a0"}, "kids": {"emoji": "🧸", "label": "ของเล่นเด็กยอดนิยม", "color": "#ffeaa7"}, "custom": {"emoji": "🛒", "label": "สินค้าแนะนำ", "color": "#b2bec3"}};
+let activeMode = 'all';
+
+// Build filter tabs
+function buildTabs() {
+  const tabs = document.getElementById('tabs');
+  const modes = [...new Set(GROUPS.map(g => g.mode))];
+  modes.forEach(mode => {
+    const m = MODE_META[mode] || {};
+    const btn = document.createElement('button');
+    btn.className = 'tab';
+    btn.textContent = (m.emoji || '') + ' ' + (m.label || mode);
+    btn.onclick = () => filterMode(mode, btn);
+    tabs.appendChild(btn);
+  });
+}
+
+// Build product card HTML
+function cardHTML(p, color) {
+  const rankColor = color || '#ff4444';
+  const imgSrc = p.image || '';
+  const imgEl = imgSrc
+    ? `<img class="card-img" src="${imgSrc}" alt="${p.name}" loading="lazy"
+         onerror="this.outerHTML='<div class=\'card-img error\'>📦</div>'">`
+    : `<div class="card-img error">📦</div>`;
+
+  const btnEl = p.url
+    ? `<a class="card-btn" href="${p.url}" target="_blank" rel="nofollow noopener">ดูสินค้า →</a>`
+    : `<span class="card-btn no-link">ไม่มีลิ้งก์</span>`;
+
+  return `
+    <div class="card" data-name="${p.name.toLowerCase()}" data-mode="">
+      ${imgEl}
+      <div class="rank-badge" style="background:${rankColor}">#${p.rank}</div>
+      <div class="card-body">
+        <div class="card-name">${p.name}</div>
+        <div class="card-price">${p.price_str}</div>
+        ${p.sold ? `<div class="card-sold">${p.sold}</div>` : ''}
+        ${btnEl}
+      </div>
+    </div>`;
+}
+
+// Render all groups
+function renderGroups(groups) {
+  const main = document.getElementById('main');
+  if (!groups.length) {
+    main.innerHTML = `<div class="empty"><div class="empty-icon">📦</div><div>ยังไม่มีสินค้า</div></div>`;
+    return;
+  }
+  main.innerHTML = groups.map(g => {
+    const m = MODE_META[g.mode] || {};
+    const color = m.color || '#ff4444';
+    const cards = g.products.map(p => cardHTML(p, color)).join('');
+    return `
+      <div class="group" data-mode="${g.mode}">
+        <div class="group-header">
+          <span class="group-emoji">${m.emoji || '🛒'}</span>
+          <div>
+            <div class="group-title">${g.title}</div>
+            <span class="group-keyword">${g.keyword || g.mode}</span>
+          </div>
+          <div class="group-meta">
+            ${g.date}<br>
+            <span style="color:${color}">${m.label || g.mode}</span>
+          </div>
+        </div>
+        <div class="grid">${cards}</div>
+      </div>`;
+  }).join('');
+}
+
+function filterMode(mode, el) {
+  activeMode = mode;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (el) el.classList.add('active');
+  filterAll();
+}
+
+function filterAll() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const groups = GROUPS.filter(g => activeMode === 'all' || g.mode === activeMode);
+
+  let filteredGroups;
+  if (!q) {
+    filteredGroups = groups;
+  } else {
+    filteredGroups = groups.map(g => ({
+      ...g,
+      products: g.products.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        g.title.toLowerCase().includes(q) ||
+        (g.keyword || '').toLowerCase().includes(q)
+      )
+    })).filter(g => g.products.length > 0);
+  }
+
+  renderGroups(filteredGroups);
+  document.getElementById('no-results').style.display =
+    filteredGroups.length === 0 && q ? 'block' : 'none';
+}
+
+// Init
+buildTabs();
+renderGroups(GROUPS);
+</script>
+</body>
+</html>
