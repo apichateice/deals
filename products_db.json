@@ -1,6 +1,336 @@
 {
   "groups": [
     {
+      "key": "cheapest_20260426",
+      "mode": "cheapest",
+      "title": "5 เครื่องปรุงอาหารราคาถูกสุด",
+      "keyword": "เครื่องปรุงอาหาร",
+      "date": "26/04/2026",
+      "updated": "2026-04-26T16:26:56.286436",
+      "products": [
+        {
+          "rank": 1,
+          "name": "ผงปรุงรส ผงเขย่า มีหลายรสให้เลือก",
+          "price_str": "฿12",
+          "price": 12.0,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i3260967419.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_3260967419.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "พริกแกงเรือนไทย 50 g ซีลสุญญากาศ รสกลมกล่อม อร่อย",
+          "price_str": "฿12",
+          "price": 12.0,
+          "sold": "ขายแล้ว 4พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i2460616127.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_2460616127.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "RosDee Menu รสดีเมนู หมัก แกง ลาบ พะโล้",
+          "price_str": "฿20",
+          "price": 20.0,
+          "sold": "ขายแล้ว 2หมื่นกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i2763741806.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_2763741806.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "i-Chef ไอเชฟ เครื่องปรุงสำเร็จ",
+          "price_str": "฿20",
+          "price": 20.0,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4657190674.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4657190674.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "FaThai ฟ้าไทย โฮม คิทเช่น ซอสปรุงสำเร็จรูป 75",
+          "price_str": "฿20",
+          "price": 20.0,
+          "sold": "ขายแล้วหกร้อยเจ็ดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5123710136.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5123710136.jpg"
+        }
+      ]
+    },
+    {
+      "key": "expensive_20260426",
+      "mode": "expensive",
+      "title": "5 เครื่องออกกำลังกายพรีเมียม",
+      "keyword": "เครื่องออกกำลังกาย",
+      "date": "26/04/2026",
+      "updated": "2026-04-26T16:23:50.054915",
+      "products": [
+        {
+          "rank": 1,
+          "name": "MA-29 – เครื่อง Multi-Press Pin-Load – IVADE –",
+          "price_str": "฿45,800",
+          "price": 45800.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5752901479.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5752901479.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "สมิทแมชชีน รุ่น S230 - เครื่องออกกำลังกายแบรนด์",
+          "price_str": "฿39,800",
+          "price": 39800.0,
+          "sold": "ขายแล้วยี่สิบเอ็ดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5741713333.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5741713333.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "เครื่องออกกำลังกาย รุ่น Single Cable Core Plus",
+          "price_str": "฿12,900",
+          "price": 12900.0,
+          "sold": "ขายแล้วเก้าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i6035483612.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_6035483612.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "ลู่วิ่งไฟฟ้า ลู่วิ่ง C2 ปรับความชันไฟฟ้า 20°",
+          "price_str": "฿12,057",
+          "price": 12057.24,
+          "sold": "ขายแล้วหนึ่งร้อยสี่สิบสองชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i16111920457.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_16111920457.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "Air Rowing Machine",
+          "price_str": "฿11,351",
+          "price": 11350.56,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5736418457.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5736418457.jpg"
+        }
+      ]
+    },
+    {
+      "key": "pet_20260426",
+      "mode": "pet",
+      "title": "5 ของเล่นสุนัขขายดี",
+      "keyword": "ของเล่นสุนัข",
+      "date": "26/04/2026",
+      "updated": "2026-04-26T16:20:21.938754",
+      "products": [
+        {
+          "rank": 1,
+          "name": "ของเล่นสุนัขยางเคี้ยวของเล่นแบบอินเทอร์แอคทีฟและไม",
+          "price_str": "฿105",
+          "price": 105.45,
+          "sold": "ขายแล้วหกสิบสี่ชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5776875241.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5776875241.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "Cori Petto สินค้าพร้อมส่ง ของเล่นสุนัข เชือกกัด",
+          "price_str": "฿89",
+          "price": 89.0,
+          "sold": "ขายแล้วเก้าร้อยสิบหกชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i2608329737.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_2608329737.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "ของเล่นสุนัข ของเล่นสัตว์เลี้ยง ไก่โอ็ก ตัวใหญ่",
+          "price_str": "฿35",
+          "price": 35.0,
+          "sold": "ขายแล้วสองร้อยแปดสิบหกชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i2412942063.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_2412942063.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "Cori Petto สินค้าพร้อมส่ง สต๊อกไทย ของเล่นสุนัข",
+          "price_str": "฿100",
+          "price": 100.0,
+          "sold": "ขายแล้วสามร้อยสี่สิบเก้าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i2633231543.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_2633231543.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "หนังวัวอัดกระดูกChompers กระดูกสุนัข ของเล่นสุนัข",
+          "price_str": "฿39",
+          "price": 39.0,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5336194984.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5336194984.jpg"
+        }
+      ]
+    },
+    {
+      "key": "collectible_20260426",
+      "mode": "collectible",
+      "title": "5 โมเดลรถพรีเมียม",
+      "keyword": "โมเดลรถ",
+      "date": "26/04/2026",
+      "updated": "2026-04-26T16:17:10.670608",
+      "products": [
+        {
+          "rank": 1,
+          "name": "โมเดลรถโลหะอัลลอยด์ขนาด 1:64 YES ISUZU ELF",
+          "price_str": "฿2,060",
+          "price": 2059.6,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i16115909104.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_16115909104.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "โมเดลรถเหล็ก 1/24 2003 Nissan 350Z",
+          "price_str": "฿1,790",
+          "price": 1790.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5574830310.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5574830310.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "โมเดลรถเหล็ก 1/24 1970 Dodge Charger",
+          "price_str": "฿1,590",
+          "price": 1590.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5575651399.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5575651399.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "โมเดลรถเหล็ก Hot Wheels Premium Formula 1 Racing",
+          "price_str": "฿1,390",
+          "price": 1390.0,
+          "sold": "ขายแล้วแปดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5824167707.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5824167707.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "โมเดลรถเหล็ก 1/24 1967 Shelby GT-500",
+          "price_str": "฿1,390",
+          "price": 1390.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5575273361.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5575273361.jpg"
+        }
+      ]
+    },
+    {
+      "key": "bestseller_20260426",
+      "mode": "bestseller",
+      "title": "5 กระเป๋าขายดี",
+      "keyword": "กระเป๋า",
+      "date": "26/04/2026",
+      "updated": "2026-04-26T16:10:11.803432",
+      "products": [
+        {
+          "rank": 1,
+          "name": "FXSAXUNN กระเป๋าแฟชั่นสตรีกระเป๋าสะพายข้างหนึ่ง,",
+          "price_str": "฿79",
+          "price": 78.85,
+          "sold": "ขายแล้ว 8พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5949973780.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5949973780.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "กระเป๋าผู้หญิงภายในกระเป๋าสะพายไหล่ใบเล็กอเนกประสง",
+          "price_str": "฿40",
+          "price": 40.0,
+          "sold": "ขายแล้ว 3หมื่นกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4863669418.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4863669418.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "Aideng กระเป๋าผู้หญิง กระเป๋าคาดอก",
+          "price_str": "฿41",
+          "price": 41.46,
+          "sold": "ขายแล้ว 2พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4486390867.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4486390867.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "กระเป๋าสำหรับเด็กนักเรียน",
+          "price_str": "฿49",
+          "price": 49.0,
+          "sold": "ขายแล้ว 9พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4863564838.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4863564838.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "กระเป๋าผู้ชาย กระเป๋าสะพายไหล่",
+          "price_str": "฿44",
+          "price": 44.17,
+          "sold": "ขายแล้ว 3พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4570752457.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4570752457.jpg"
+        }
+      ]
+    },
+    {
+      "key": "home_20260426",
+      "mode": "home",
+      "title": "5 ของแต่งบ้านสุดคุ้ม",
+      "keyword": "ของแต่งบ้าน",
+      "date": "26/04/2026",
+      "updated": "2026-04-26T07:11:50.445169",
+      "products": [
+        {
+          "rank": 1,
+          "name": "ครีมกันแดด SPF50+ ขนาด 50ml",
+          "price_str": "฿299",
+          "price": 299.0,
+          "sold": "ขายแล้ว 9.9k ชิ้น",
+          "url": "",
+          "image": "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=700&h=700&fit=crop"
+        },
+        {
+          "rank": 2,
+          "name": "หูฟัง True Wireless กันน้ำ IPX5",
+          "price_str": "฿799",
+          "price": 799.0,
+          "sold": "ขายแล้ว 7.5k ชิ้น",
+          "url": "",
+          "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&h=700&fit=crop"
+        },
+        {
+          "rank": 3,
+          "name": "กระเป๋าผ้า Canvas ลายน่ารัก",
+          "price_str": "฿189",
+          "price": 189.0,
+          "sold": "ขายแล้ว 5.3k ชิ้น",
+          "url": "",
+          "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700&h=700&fit=crop"
+        },
+        {
+          "rank": 4,
+          "name": "น้ำยาบ้วนปาก ฟลูออไรด์ 500ml",
+          "price_str": "฿129",
+          "price": 129.0,
+          "sold": "ขายแล้ว 4.1k ชิ้น",
+          "url": "",
+          "image": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=700&h=700&fit=crop"
+        },
+        {
+          "rank": 5,
+          "name": "แก้วน้ำสแตนเลส เก็บความเย็น 24 ชม.",
+          "price_str": "฿349",
+          "price": 349.0,
+          "sold": "ขายแล้ว 3.8k ชิ้น",
+          "url": "",
+          "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=700&h=700&fit=crop"
+        }
+      ]
+    },
+    {
       "key": "newest_20260425",
       "mode": "newest",
       "title": "5 สินค้ามาใหม่",
@@ -221,5 +551,5 @@
       ]
     }
   ],
-  "updated": "2026-04-25T15:33:28.227969"
+  "updated": "2026-04-26T16:26:56.286547"
 }
