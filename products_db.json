@@ -276,61 +276,6 @@
       ]
     },
     {
-      "key": "home_20260426",
-      "mode": "home",
-      "title": "5 ของแต่งบ้านสุดคุ้ม",
-      "keyword": "ของแต่งบ้าน",
-      "date": "26/04/2026",
-      "updated": "2026-04-26T07:11:50.445169",
-      "products": [
-        {
-          "rank": 1,
-          "name": "ครีมกันแดด SPF50+ ขนาด 50ml",
-          "price_str": "฿299",
-          "price": 299.0,
-          "sold": "ขายแล้ว 9.9k ชิ้น",
-          "url": "",
-          "image": "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=700&h=700&fit=crop"
-        },
-        {
-          "rank": 2,
-          "name": "หูฟัง True Wireless กันน้ำ IPX5",
-          "price_str": "฿799",
-          "price": 799.0,
-          "sold": "ขายแล้ว 7.5k ชิ้น",
-          "url": "",
-          "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700&h=700&fit=crop"
-        },
-        {
-          "rank": 3,
-          "name": "กระเป๋าผ้า Canvas ลายน่ารัก",
-          "price_str": "฿189",
-          "price": 189.0,
-          "sold": "ขายแล้ว 5.3k ชิ้น",
-          "url": "",
-          "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700&h=700&fit=crop"
-        },
-        {
-          "rank": 4,
-          "name": "น้ำยาบ้วนปาก ฟลูออไรด์ 500ml",
-          "price_str": "฿129",
-          "price": 129.0,
-          "sold": "ขายแล้ว 4.1k ชิ้น",
-          "url": "",
-          "image": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?w=700&h=700&fit=crop"
-        },
-        {
-          "rank": 5,
-          "name": "แก้วน้ำสแตนเลส เก็บความเย็น 24 ชม.",
-          "price_str": "฿349",
-          "price": 349.0,
-          "sold": "ขายแล้ว 3.8k ชิ้น",
-          "url": "",
-          "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?w=700&h=700&fit=crop"
-        }
-      ]
-    },
-    {
       "key": "newest_20260425",
       "mode": "newest",
       "title": "5 สินค้ามาใหม่",
