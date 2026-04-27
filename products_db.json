@@ -1,6 +1,61 @@
 {
   "groups": [
     {
+      "key": "collectible_20260427",
+      "mode": "collectible",
+      "title": "5 ฟิกเกอร์อนิเมะพรีเมียม",
+      "keyword": "ฟิกเกอร์อนิเมะ",
+      "date": "27/04/2026",
+      "updated": "2026-04-27T12:54:31.357399",
+      "products": [
+        {
+          "rank": 1,
+          "name": "Model โมเดล Figure ฟิกเกอร์ SkyTube T2 Art Girls",
+          "price_str": "฿2,525",
+          "price": 2525.0,
+          "sold": "ขายแล้วเจ็ดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i1632968797.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_1632968797.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "Figure ฟิกเกอร์ BINDing Native",
+          "price_str": "฿2,520",
+          "price": 2520.0,
+          "sold": "ขายแล้วเจ็ดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4157307303.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4157307303.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "Figure ฟิกเกอร์ By SkyTube สกายทูป",
+          "price_str": "฿2,290",
+          "price": 2290.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i4157204637.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4157204637.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "ABYStyle ฟิกเกอร์ ฟิกเกอร์อนิเมะ โมเดล Death Note",
+          "price_str": "฿1,899",
+          "price": 1899.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5486976514.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5486976514.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "Bandai โมเดลฟิกเกอร์อนิเมะฮิเมโกะจาก Honkai: Star",
+          "price_str": "฿1,253",
+          "price": 1253.49,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i16116467299.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_16116467299.jpg"
+        }
+      ]
+    },
+    {
       "key": "limited_20260427",
       "mode": "limited",
       "title": "5 ของแต่งบ้านพรีเมียม",
@@ -716,5 +771,5 @@
       ]
     }
   ],
-  "updated": "2026-04-27T12:38:09.265035"
+  "updated": "2026-04-27T12:54:31.357532"
 }
