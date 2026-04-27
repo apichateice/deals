@@ -1,6 +1,61 @@
 {
   "groups": [
     {
+      "key": "limited_20260427",
+      "mode": "limited",
+      "title": "5 ของแต่งบ้านพรีเมียม",
+      "keyword": "ของแต่งบ้าน",
+      "date": "27/04/2026",
+      "updated": "2026-04-27T12:38:09.264923",
+      "products": [
+        {
+          "rank": 1,
+          "name": "แผ่นไม้ แกะสลัก รูป มือดอกบัว แขวนผนัง ไม้แกะสลัก",
+          "price_str": "฿11,055",
+          "price": 11055.3,
+          "sold": "ขายแล้วหกสิบสองชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i567288994.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_567288994.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "กรอบรูป กรอบลอย รูปภาพ เสริมมงคล ภาพแต่งบ้าน",
+          "price_str": "฿3,200",
+          "price": 3200.0,
+          "sold": "ขายแล้วเก้าสิบสี่ชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i257630256.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_257630256.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "การตกแต่งผนังโลหะรูปใบบัวแบบ3D",
+          "price_str": "฿3,184",
+          "price": 3184.04,
+          "sold": "ขายแล้วสิบเก้าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5760444052.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5760444052.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "ชุดศิลปะบนผนังโลหะฟลามิงโกขนาดใหญ่2ชิ้นเครื่องตกแต",
+          "price_str": "฿2,883",
+          "price": 2883.3,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i16091825003.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_16091825003.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "ใบไม้ตกแต่งผนังสไตล์โบฮีเมียน",
+          "price_str": "฿1,835",
+          "price": 1835.4,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5850216120.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5850216120.jpg"
+        }
+      ]
+    },
+    {
       "key": "cheapest_20260427",
       "mode": "cheapest",
       "title": "5 เครื่องเขียนราคาถูกสุด",
@@ -661,5 +716,5 @@
       ]
     }
   ],
-  "updated": "2026-04-27T11:15:25.649314"
+  "updated": "2026-04-27T12:38:09.265035"
 }
