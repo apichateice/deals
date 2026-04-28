@@ -1,6 +1,272 @@
 {
   "groups": [
     {
+      "key": "beauty_20260428",
+      "mode": "beauty",
+      "title": "5 รองพื้นขายดี",
+      "keyword": "รองพื้น",
+      "date": "28/04/2026",
+      "updated": "2026-04-28T11:23:59.178226",
+      "products": [
+        {
+          "rank": 1,
+          "name": "Merrezca Perfect Matte Foundation SPF50+/ PA++++",
+          "price_str": "฿43",
+          "price": 43.26,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5041314305.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5041314305.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "สินค้าพร้อมส่งจากไทย Music Flower Photo Genic",
+          "price_str": "฿79",
+          "price": 78.68,
+          "sold": "ขายแล้ว 7พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4890559676.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4890559676.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "T.LI/*！！\"ครีมรองพื้น เรฟลอน คัลเลอร์สเตย์ REVLON",
+          "price_str": "฿45",
+          "price": 45.0,
+          "sold": "ขายแล้ว 1หมื่นกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5124071108.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5124071108.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "สินค้ามีพร้อมส่งค่ะ Music Flower Photo Genic",
+          "price_str": "฿74",
+          "price": 74.37,
+          "sold": "ขายแล้ว 3พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5152803138.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5152803138.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "รองพื้นม่วง Music flower photogenic overtime",
+          "price_str": "฿89",
+          "price": 89.0,
+          "sold": "ขายแล้วเก้าร้อยสิบสองชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4531283213.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4531283213.jpg"
+        }
+      ]
+    },
+    {
+      "key": "home_20260428",
+      "mode": "home",
+      "title": "5 เฟอร์นิเจอร์มินิมอลขายดี",
+      "keyword": "เฟอร์นิเจอร์มินิมอล",
+      "date": "28/04/2026",
+      "updated": "2026-04-28T11:20:32.061525",
+      "products": [
+        {
+          "rank": 1,
+          "name": "SM-009 โต๊ะข้างโซฟา2ชั้น โต๊ะข้างเตียงมินิมอล",
+          "price_str": "฿70",
+          "price": 69.9,
+          "sold": "ขายแล้วห้าสิบเก้าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5963344145.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5963344145.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "โต๊ะพับลายการ์ตูนสไตล์มินิมอลพร้อมลิ้นชัก ขนาด",
+          "price_str": "฿78",
+          "price": 78.0,
+          "sold": "ขายแล้ว 8พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4888270595.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4888270595.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "โต๊ะข้างโซฟา2ชั้น โต๊ะข้างเตียงมินิมอล",
+          "price_str": "฿49",
+          "price": 49.0,
+          "sold": "ขายแล้วหนึ่งร้อยยี่สิบเอ็ดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i6075781151.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_6075781151.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "SellerHM โต๊ะ ห้องทำงาน โต๊ะทำงาน",
+          "price_str": "฿109",
+          "price": 109.25,
+          "sold": "ขายแล้วแปดสิบเก้าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i6008045368.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_6008045368.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "โต๊ะทำงาน โต๊ะคอมพิวเตอร์ โต๊ะคอม",
+          "price_str": "฿237",
+          "price": 237.0,
+          "sold": "ขายแล้วหนึ่งร้อยหกชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i16046572093.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_16046572093.jpg"
+        }
+      ]
+    },
+    {
+      "key": "toprated_20260428",
+      "mode": "toprated",
+      "title": "5 มาส์กหน้าคะแนนดีสุด",
+      "keyword": "มาส์กหน้า",
+      "date": "28/04/2026",
+      "updated": "2026-04-28T11:16:25.627244",
+      "products": [
+        {
+          "rank": 1,
+          "name": "YTL แผ่นมาร์คหน้า มาส์กส่วนผสมธรรมชาติ",
+          "price_str": "฿3",
+          "price": 2.87,
+          "sold": "ขายแล้ว 6พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4514008294.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4514008294.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "แผ่นมาส์กหน้า Rojukiss Mask มาสก์หน้า โรจูคิส",
+          "price_str": "฿20",
+          "price": 20.0,
+          "sold": "ขายแล้ว 3หมื่นกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4983645392.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4983645392.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "Innisfree My Real Squeeze Mask มาส์กหน้า",
+          "price_str": "฿9",
+          "price": 9.0,
+          "sold": "ขายแล้ว 2หมื่นกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4025432866.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4025432866.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "LEADERS Regeneration Mask แผ่นมาส์กหน้า 28ml",
+          "price_str": "฿34",
+          "price": 34.0,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i3503454651.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_3503454651.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "Baby Bright บูสเตอร์มาส์กชีท 20g เบบี้ไบร์ท",
+          "price_str": "฿20",
+          "price": 20.0,
+          "sold": "ขายแล้ว 5พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4958938117.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4958938117.jpg"
+        }
+      ]
+    },
+    {
+      "key": "kids_20260428",
+      "mode": "kids",
+      "title": "5 ของเล่นบทบาทสมมติขายดี",
+      "keyword": "ของเล่นบทบาทสมมติ",
+      "date": "28/04/2026",
+      "updated": "2026-04-28T11:12:57.575697",
+      "products": [
+        {
+          "rank": 1,
+          "name": "GIORGIONE กล่องหมีสนุก ของเล่นให้อาหาร บทบาทสมมติ",
+          "price_str": "฿55",
+          "price": 55.2,
+          "sold": "ขายแล้วหนึ่งร้อยยี่สิบห้าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5839648593.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5839648593.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "ของเล่นเด็กมอนเตสซอรี่สำหรับเด็กผู้หญิงเด็กผู้ชาย",
+          "price_str": "฿92",
+          "price": 92.43,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i16104908873.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_16104908873.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "AOJU ของเล่นสำหรับเกมบทบาท บทบาทสมมติ",
+          "price_str": "฿24",
+          "price": 24.25,
+          "sold": "ขายแล้วแปดร้อยเก้าสิบแปดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5853390976.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5853390976.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "Yuecomfly หุ่นยนต์ของเล่น บทบาทสมมติ",
+          "price_str": "฿44",
+          "price": 44.0,
+          "sold": "",
+          "url": "https://www.lazada.co.th/products/pdp-i5928852853.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5928852853.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "BB-STORE ”Fruits” ของเล่นไม้หั่นผลไม้",
+          "price_str": "฿49",
+          "price": 49.0,
+          "sold": "ขายแล้วเก้าร้อยแปดสิบเจ็ดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i2865674673.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_2865674673.jpg"
+        }
+      ]
+    },
+    {
+      "key": "bestseller_20260428",
+      "mode": "bestseller",
+      "title": "5 หมอนหนุนขายดี",
+      "keyword": "หมอนหนุน",
+      "date": "28/04/2026",
+      "updated": "2026-04-28T11:09:15.716287",
+      "products": [
+        {
+          "rank": 1,
+          "name": "หมอนหนุน หมอนหนุนขาว หมอนหนุนใยสังเคราะห์เด้ง",
+          "price_str": "฿54",
+          "price": 54.12,
+          "sold": "ขายแล้วสองร้อยแปดสิบหกชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i3581265892.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_3581265892.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "หมอนหนุน หมอนหนุนสูญญากาศ หมอนหนุนใยสังเคราะห์",
+          "price_str": "฿54",
+          "price": 54.12,
+          "sold": "ขายแล้วสองร้อยเจ็ดสิบแปดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4698354140.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4698354140.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "หมอหนุน หมอนพิมพ์ลายกาตูนน่ารักราคาโรงงานถูกสุดๆ",
+          "price_str": "฿62",
+          "price": 62.46,
+          "sold": "ขายแล้ว 4พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4973024860.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4973024860.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "หมอนหนุน หมอนข้างใบใหญ่ขนาดมาตรฐาน",
+          "price_str": "฿62",
+          "price": 62.46,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5680417839.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5680417839.jpg"
+        }
+      ]
+    },
+    {
       "key": "collectible_20260427",
       "mode": "collectible",
       "title": "5 ฟิกเกอร์อนิเมะพรีเมียม",
@@ -771,5 +1037,5 @@
       ]
     }
   ],
-  "updated": "2026-04-27T12:54:31.357532"
+  "updated": "2026-04-28T11:23:59.178352"
 }
