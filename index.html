@@ -393,6 +393,13 @@ function filterAll() {
     })).filter(g => g.products.length > 0);
   }
 
+  if (activeDate === 'all') {
+    filteredGroups = [...filteredGroups].sort((a, b) => {
+      const parse = d => { const [dd,mm,yy] = d.split('/'); return new Date(yy,mm-1,dd); };
+      return parse(b.date) - parse(a.date);
+    });
+  }
+
   renderGroups(filteredGroups);
   document.getElementById('no-results').style.display =
     filteredGroups.length === 0 && q ? 'block' : 'none';
@@ -401,7 +408,7 @@ function filterAll() {
 // Init
 buildTabs();
 buildDateTabs();
-renderGroups(GROUPS);
+filterAll();
 </script>
 </body>
 </html>
