@@ -1,6 +1,61 @@
 {
   "groups": [
     {
+      "key": "bestseller_20260501",
+      "mode": "bestseller",
+      "title": "5 อุปกรณ์กีฬาขายดี",
+      "keyword": "อุปกรณ์กีฬา",
+      "date": "01/05/2026",
+      "updated": "2026-05-01T19:58:52.926916",
+      "products": [
+        {
+          "rank": 1,
+          "name": "เสาสลาลมฟุตบอล อุปกรณ์ฝึกซ้อมฟุตบอลสูง 1 และ1.5m",
+          "price_str": "฿105",
+          "price": 105.0,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4812370725.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4812370725.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "23ซม กรวยฝึกซ้อม กรวยซ้อมวิ่ง กรวยซ้อมบอล",
+          "price_str": "฿137",
+          "price": 137.0,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4264666914.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4264666914.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "เสา และ ฐาน สำหรับฝึกซ้อมฟุตบอล",
+          "price_str": "฿69",
+          "price": 69.0,
+          "sold": "ขายแล้วเก้าสิบเอ็ดชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4216495047.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4216495047.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "Speed Agility Ladder สปีดแลดเดอร์",
+          "price_str": "฿78",
+          "price": 78.0,
+          "sold": "ขายแล้ว 3พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i3839414997.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_3839414997.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "1pcsแท่นกระโดดข้าม อุปกรณ์ฝึกซ้อมข้ามสิ่งกีดขวาง",
+          "price_str": "฿55",
+          "price": 55.0,
+          "sold": "ขายแล้ว 2พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i4807520625.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_4807520625.jpg"
+        }
+      ]
+    },
+    {
       "key": "beauty_20260428",
       "mode": "beauty",
       "title": "5 รองพื้นขายดี",
@@ -1578,5 +1633,5 @@
       ]
     }
   ],
-  "updated": "2026-04-30T22:23:03.007170"
+  "updated": "2026-05-01T19:58:52.926953"
 }
