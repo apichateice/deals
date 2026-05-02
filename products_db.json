@@ -1,6 +1,61 @@
 {
   "groups": [
     {
+      "key": "bestseller_20260502",
+      "mode": "bestseller",
+      "title": "5 อาหารเสริมขายดี",
+      "keyword": "อาหารเสริม",
+      "date": "02/05/2026",
+      "updated": "2026-05-02T07:34:57.590040",
+      "products": [
+        {
+          "rank": 1,
+          "name": "VISTRA Magnesium Complex PLUS Vitamin วิสทร้า",
+          "price_str": "฿270",
+          "price": 270.0,
+          "sold": "ขายแล้ว 2หมื่นกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i123150632.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_123150632.jpg"
+        },
+        {
+          "rank": 2,
+          "name": "อาหารเสริม OMG Emperor สูตรจักรพรรดิ โสม ถั่งเช่า",
+          "price_str": "฿890",
+          "price": 890.0,
+          "sold": "ขายแล้ว 7พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i357854834.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_357854834.jpg"
+        },
+        {
+          "rank": 3,
+          "name": "ใหม่ล่าสุด* Chuu ชูยู อาหารเสริมสำหรับท่านชาย",
+          "price_str": "฿160",
+          "price": 160.0,
+          "sold": "ขายแล้ว 1พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5752782791.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5752782791.jpg"
+        },
+        {
+          "rank": 4,
+          "name": "Dr.PONG B Complex 1-6-12 Vitamin B1 B6 B12",
+          "price_str": "฿279",
+          "price": 279.0,
+          "sold": "ขายแล้ว 3พันกว่าชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5449964269.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5449964269.jpg"
+        },
+        {
+          "rank": 5,
+          "name": "Dr.PONG GLUTA 250 SL กลูตาไธโอนเพื่อผิวกระจ่างใส",
+          "price_str": "฿579",
+          "price": 579.0,
+          "sold": "ขายแล้วแปดร้อยสี่สิบชิ้น",
+          "url": "https://www.lazada.co.th/products/pdp-i5114017532.html?t=p-i5WHa7P-sNKs264",
+          "image": "images/item_5114017532.jpg"
+        }
+      ]
+    },
+    {
       "key": "bestseller_20260501",
       "mode": "bestseller",
       "title": "5 กระเป๋าขายดี",
@@ -1633,5 +1688,5 @@
       ]
     }
   ],
-  "updated": "2026-05-01T21:40:51.883384"
+  "updated": "2026-05-02T07:34:57.590078"
 }
