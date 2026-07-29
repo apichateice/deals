@@ -1,414 +1,921 @@
-<!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🛒 สินค้าแนะนำ Lazada ประจำวัน</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0f0f1a;
-      --card: #1a1a2e;
-      --card2: #16213e;
-      --accent: #ff4444;
-      --text: #f0f0f0;
-      --sub: #a0a0b0;
-      --border: #2a2a3e;
-      --radius: 16px;
-    }
-    body {
-      font-family: 'Sarabun', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+<title>คำนวณภาษีเงินได้บุคคลธรรมดา</title>
 
-    /* ── Header ── */
-    .header {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 20px 16px 16px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(12px);
-    }
-    .header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-    .logo { font-size: 22px; font-weight: 800; color: var(--accent); }
-    .updated { font-size: 12px; color: var(--sub); }
+<style>
+:root {
+  color-scheme: light;
+  --is-dark: 0;
+  --paper:   #F1F3EF;
+  --card:    #FFFFFF;
+  --sunk:    #E8ECE7;
+  --ink:     #14201A;
+  --ink-2:   #55635B;
+  --ink-3:   #8B9891;
+  --line:    #D6DDD6;
+  --line-2:  #C2CCC3;
+  --accent:  #0E6B4B;
+  --accent-2:#0A5239;
+  --soft:    #DDEBE2;
+  --warn:    #A34A22;
+  --warn-soft:#F6E5DB;
+  --shadow:  0 1px 2px rgba(20,32,26,.05), 0 8px 24px -14px rgba(20,32,26,.28);
 
-    /* ── Search ── */
-    .search-bar {
-      position: relative;
-      margin-bottom: 12px;
-    }
-    .search-bar input {
-      width: 100%;
-      padding: 12px 44px 12px 16px;
-      border-radius: 50px;
-      border: 1.5px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Sarabun', sans-serif;
-      font-size: 15px;
-      outline: none;
-      transition: border-color .2s;
-    }
-    .search-bar input:focus { border-color: var(--accent); }
-    .search-bar .icon {
-      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-      font-size: 18px; pointer-events: none;
-    }
+  --font: "Sukhumvit Set", "Leelawadee UI", "Noto Sans Thai", "Helvetica Neue", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --is-dark: 1;
+    --paper:  #0D1411;
+    --card:   #151E19;
+    --sunk:   #1A251F;
+    --ink:    #E7EEE8;
+    --ink-2:  #9AA9A0;
+    --ink-3:  #6D7C74;
+    --line:   #26332C;
+    --line-2: #33443A;
+    --accent: #4CC78E;
+    --accent-2:#7FDDAE;
+    --soft:   #173328;
+    --warn:   #E28A5C;
+    --warn-soft:#2C1D14;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --is-dark: 1;
+  --paper:#0D1411; --card:#151E19; --sunk:#1A251F;
+  --ink:#E7EEE8; --ink-2:#9AA9A0; --ink-3:#6D7C74;
+  --line:#26332C; --line-2:#33443A;
+  --accent:#4CC78E; --accent-2:#7FDDAE; --soft:#173328;
+  --warn:#E28A5C; --warn-soft:#2C1D14;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.9);
+}
+:root[data-theme="light"] {
+  color-scheme: light;
+  --is-dark: 0;
+  --paper:#F1F3EF; --card:#FFFFFF; --sunk:#E8ECE7;
+  --ink:#14201A; --ink-2:#55635B; --ink-3:#8B9891;
+  --line:#D6DDD6; --line-2:#C2CCC3;
+  --accent:#0E6B4B; --accent-2:#0A5239; --soft:#DDEBE2;
+  --warn:#A34A22; --warn-soft:#F6E5DB;
+  --shadow: 0 1px 2px rgba(20,32,26,.05), 0 8px 24px -14px rgba(20,32,26,.28);
+}
 
-    /* ── Filter tabs ── */
-    .filter-tabs {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-      scrollbar-width: none;
-    }
-    .filter-tabs::-webkit-scrollbar { display: none; }
-    .tab {
-      flex-shrink: 0;
-      padding: 6px 14px;
-      border-radius: 50px;
-      border: 1.5px solid var(--border);
-      background: transparent;
-      color: var(--sub);
-      font-family: 'Sarabun', sans-serif;
-      font-size: 13px;
-      cursor: pointer;
-      transition: all .2s;
-      white-space: nowrap;
-    }
-    .tab:hover { border-color: #555; color: var(--text); }
-    .tab.active { border-color: var(--accent); color: var(--accent); background: rgba(255,68,68,.12); }
-    .date-tabs { margin-top: 8px; }
-    .tab.date-tab.active { border-color: #a29bfe; color: #a29bfe; background: rgba(162,155,254,.12); }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px 72px; }
 
-    /* ── Main content ── */
-    .main { max-width: 1200px; margin: 0 auto; padding: 20px 12px 40px; }
+/* ---------- masthead ---------- */
+.masthead {
+  display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 24px;
+  padding: 34px 0 18px;
+  border-bottom: 2px solid var(--ink);
+}
+.masthead h1 {
+  margin: 0; font-size: clamp(26px, 4vw, 38px); font-weight: 700;
+  letter-spacing: -.02em; line-height: 1.15; text-wrap: balance;
+}
+.masthead .sub {
+  margin: 4px 0 0; color: var(--ink-2); font-size: 14px; max-width: 46ch;
+}
+.masthead .right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
 
-    /* ── Group section ── */
-    .group { margin-bottom: 40px; }
-    .group-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--border);
-    }
-    .group-emoji { font-size: 28px; }
-    .group-title { font-size: 20px; font-weight: 800; }
-    .group-meta { margin-left: auto; font-size: 12px; color: var(--sub); text-align: right; }
-    .group-keyword {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 50px;
-      font-size: 11px;
-      font-weight: 600;
-      background: rgba(255,255,255,.08);
-      color: var(--sub);
-    }
+.eyebrow {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--accent); font-weight: 500;
+}
 
-    /* ── Product grid ── */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 12px;
-    }
-    @media(min-width: 640px) { .grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; } }
-    @media(min-width: 1024px) { .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); } }
+/* ---------- controls ---------- */
+select, input, button { font-family: inherit; font-size: 14px; color: inherit; }
+select, .btn {
+  background: var(--card); border: 1px solid var(--line-2); border-radius: 2px;
+  padding: 7px 11px; cursor: pointer; color: var(--ink);
+}
+.btn:hover, select:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+:root[data-theme="dark"] .btn.primary, :root:not([data-theme="light"]) .btn.primary { color: #08150F; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .btn.primary { color: #fff; } }
+.btn.ghost { background: transparent; }
+.btn.danger { color: var(--warn); border-color: var(--warn); background: transparent; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-    /* ── Product card ── */
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transition: transform .2s, box-shadow .2s;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,.4);
-    }
-    .card-img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      background: #1e1e30;
-      display: block;
-    }
-    .card-img.error {
-      display: flex; align-items: center; justify-content: center;
-      font-size: 40px;
-    }
-    .rank-badge {
-      position: absolute;
-      top: 8px; left: 8px;
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 800;
-      color: #fff;
-      background: var(--accent);
-      box-shadow: 0 2px 8px rgba(0,0,0,.4);
-    }
-    .card-body {
-      padding: 10px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .card-name {
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      color: var(--text);
-    }
-    .card-price {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--accent);
-    }
-    .card-sold {
-      font-size: 11px;
-      color: var(--sub);
-    }
-    .card-btn {
-      margin-top: auto;
-      display: block;
-      width: 100%;
-      padding: 8px;
-      border-radius: 8px;
-      border: none;
-      background: var(--accent);
-      color: #fff;
-      font-family: 'Sarabun', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background .2s, opacity .2s;
-    }
-    .card-btn:hover { opacity: .85; }
-    .card-btn.no-link {
-      background: var(--border);
-      color: var(--sub);
-      cursor: default;
-    }
+/* ---------- tabs ---------- */
+.tabs { display: flex; gap: 26px; margin-top: 2px; }
+.tab {
+  background: none; border: 0; padding: 12px 0; cursor: pointer;
+  font-size: 15px; font-weight: 600; color: var(--ink-3);
+  border-bottom: 2px solid transparent; margin-bottom: -2px;
+}
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
 
-    /* ── Empty state ── */
-    .empty {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--sub);
-      font-size: 16px;
-    }
-    .empty-icon { font-size: 48px; margin-bottom: 12px; }
+/* ---------- layout ---------- */
+.cols { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(320px,.85fr); gap: 34px; align-items: start; margin-top: 28px; }
+@media (max-width: 900px) { .cols { grid-template-columns: 1fr; gap: 24px; } }
 
-    /* ── No results ── */
-    #no-results {
-      display: none;
-      text-align: center;
-      padding: 40px;
-      color: var(--sub);
-    }
-  </style>
-</head>
-<body>
+/* ---------- ledger ---------- */
+section.block { margin-bottom: 34px; }
+.block > h2 {
+  margin: 0 0 2px; font-size: 13px; font-weight: 700; letter-spacing: .02em;
+  display: flex; align-items: baseline; gap: 10px;
+}
+.block > h2 .n { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+.block > .note { margin: 0 0 12px; font-size: 12.5px; color: var(--ink-3); }
 
-<div class="header">
-  <div class="header-top">
-    <div class="logo">🛒 ดีลประจำวัน</div>
-    <div class="updated">อัปเดต 02/05/2026 07:42</div>
+.rows { border-top: 1px solid var(--ink); }
+.row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 0; border-bottom: 1px dotted var(--line-2);
+}
+.row .lbl { flex: 0 1 auto; }
+.row .lbl b { font-weight: 500; }
+.row .lbl small { display: block; color: var(--ink-3); font-size: 11.5px; line-height: 1.35; }
+.row .lead { flex: 1 1 20px; min-width: 12px; border-bottom: 1px dotted var(--line-2); align-self: flex-end; margin-bottom: 6px; }
+.row .fld { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; }
+.row .unit { font-family: var(--mono); font-size: 11px; color: var(--ink-3); width: 54px; white-space: nowrap; }
+.row.capped .cap { font-family: var(--mono); font-size: 11px; color: var(--warn); }
+
+input.amt {
+  width: 122px; text-align: right; padding: 6px 8px;
+  background: var(--sunk); border: 1px solid transparent; border-radius: 2px;
+  font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 13.5px;
+}
+input.amt.count { width: 62px; }
+input.amt:hover { border-color: var(--line-2); }
+input.amt:focus { background: var(--card); border-color: var(--accent); outline: none; }
+input.amt.over { color: var(--warn); }
+
+/* ---------- summary ---------- */
+.summary { position: sticky; top: 18px; display: flex; flex-direction: column; gap: 14px; }
+@media (max-width: 900px) { .summary { position: static; } }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 3px; box-shadow: var(--shadow); }
+.card .hd {
+  padding: 12px 16px; border-bottom: 1px solid var(--line);
+  font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3);
+}
+.card .bd { padding: 16px; }
+
+.headline { padding: 20px 16px 18px; text-align: right; }
+.headline .k { font-size: 12.5px; color: var(--ink-2); text-align: left; }
+.headline .v {
+  font-family: var(--mono); font-variant-numeric: tabular-nums;
+  font-size: clamp(30px, 6vw, 42px); font-weight: 600; letter-spacing: -.03em; line-height: 1.1;
+  color: var(--accent);
+}
+.headline .v.warn { color: var(--warn); }
+.headline .eff { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); margin-top: 4px; }
+
+.kv { display: flex; align-items: baseline; gap: 8px; padding: 6px 0; font-size: 13.5px; }
+.kv + .kv { border-top: 1px dotted var(--line); }
+.kv .k { color: var(--ink-2); }
+.kv .d { flex: 1; border-bottom: 1px dotted var(--line-2); }
+.kv .v { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.kv.total { font-weight: 700; border-top: 1px solid var(--ink); margin-top: 4px; padding-top: 9px; }
+.kv.total .k { color: var(--ink); }
+
+.settle { display: flex; align-items: baseline; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--line); }
+.settle .pill {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 2px; background: var(--soft); color: var(--accent-2);
+}
+:root[data-theme="dark"] .settle .pill { color: var(--accent); }
+.settle .pill.warn { background: var(--warn-soft); color: var(--warn); }
+.settle .amt2 { margin-left: auto; font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* ---------- bracket ladder ---------- */
+.ladder { display: flex; flex-direction: column; gap: 7px; }
+.step { display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: center; font-size: 12px; }
+.step .rate { font-family: var(--mono); color: var(--ink-2); text-align: right; }
+.step .track { height: 21px; position: relative; }
+.step .track::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 4px; background: var(--sunk); border-radius: 2px;
+}
+.step .fill {
+  position: absolute; left: 0; bottom: 0; height: 4px; z-index: 1;
+  border-radius: 2px; transition: width .3s ease;
+}
+.step .tax { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink-2); min-width: 74px; text-align: right; }
+.step.idle { opacity: .4; }
+.step .range {
+  position: absolute; left: 0; top: 0; line-height: 15px;
+  font-family: var(--mono); font-size: 10px; color: var(--ink-2); white-space: nowrap;
+}
+
+/* ---------- settings ---------- */
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(440px, 1fr)); gap: 26px 40px; align-items: start; }
+table.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+#dedTbl { min-width: 720px; }
+#dedTbl input[type="checkbox"] { width: auto; accent-color: var(--accent); cursor: pointer; }
+tr.off td:not(:first-child) { opacity: .42; }
+#brTbl { min-width: 300px; }
+table.tbl th {
+  text-align: left; font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink-3); font-weight: 500; white-space: nowrap;
+  padding: 6px 8px 6px 0; border-bottom: 1px solid var(--ink);
+}
+table.tbl td { padding: 5px 8px 5px 0; border-bottom: 1px dotted var(--line); vertical-align: middle; }
+table.tbl input {
+  width: 100%; padding: 5px 7px; background: var(--sunk); border: 1px solid transparent;
+  border-radius: 2px; font-family: var(--mono); font-size: 12.5px; font-variant-numeric: tabular-nums;
+}
+table.tbl input.txt { font-family: var(--font); text-align: left; }
+table.tbl input:focus { background: var(--card); border-color: var(--accent); outline: none; }
+table.tbl .x { border: 0; background: none; color: var(--ink-3); cursor: pointer; font-size: 16px; line-height: 1; padding: 2px 4px; }
+table.tbl .x:hover { color: var(--warn); }
+.scroll { overflow-x: auto; }
+.tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.msg { min-height: 18px; margin: 10px 0 0; font-size: 12.5px; color: var(--accent); }
+.msg.warn { color: var(--warn); }
+.btn.arm { background: var(--warn); border-color: var(--warn); color: #fff; }
+
+footer {
+  margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
+  font-size: 12px; color: var(--ink-3); max-width: 70ch;
+}
+.hide { display: none !important; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <div>
+      <div class="eyebrow">ภ.ง.ด. 90 / 91 · ประมาณการ</div>
+      <h1>คำนวณภาษีเงินได้บุคคลธรรมดา</h1>
+      <p class="sub">กรอกรายได้และค่าลดหย่อน แล้วดูภาษีที่ต้องเสียแบบขั้นบันได ค่าลดหย่อนและอัตราภาษีแก้ไขได้เองในแท็บตั้งค่า เมื่อมีมาตรการใหม่ประกาศออกมา</p>
+    </div>
+    <div class="right">
+      <label class="eyebrow" for="yearSel" style="letter-spacing:.1em">ปีภาษี</label>
+      <select id="yearSel"></select>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="calc">คำนวณ</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="settings">ตั้งค่าปีภาษี</button>
+  </nav>
+
+  <!-- ===== CALC ===== -->
+  <div id="tab-calc">
+    <div class="cols">
+      <div>
+        <section class="block">
+          <h2><span class="n">01</span> เงินได้พึงประเมิน</h2>
+          <p class="note" id="expenseNote"></p>
+          <div class="rows" id="incomeRows"></div>
+        </section>
+
+        <section class="block">
+          <h2><span class="n">02</span> ค่าลดหย่อนและยกเว้น</h2>
+          <p class="note">ตัวเลขทางขวาคือเพดานที่ระบบจะตัดให้อัตโนมัติ กรอกยอดจ่ายจริงได้เลย</p>
+          <div class="rows" id="dedRows"></div>
+        </section>
+
+        <section class="block">
+          <h2><span class="n">03</span> เงินบริจาค</h2>
+          <p class="note">หักได้ไม่เกิน 10% ของเงินได้หลังหักค่าใช้จ่ายและค่าลดหย่อนอื่นแล้ว</p>
+          <div class="rows" id="donRows"></div>
+        </section>
+
+        <section class="block">
+          <h2><span class="n">04</span> ภาษีที่ชำระไว้แล้ว</h2>
+          <p class="note">ภาษีหัก ณ ที่จ่ายจากใบ 50 ทวิ รวมกับภาษีครึ่งปีที่ยื่นไปแล้ว</p>
+          <div class="rows" id="paidRows"></div>
+        </section>
+      </div>
+
+      <aside class="summary">
+        <div class="card">
+          <div class="headline">
+            <div class="k">ภาษีที่ต้องเสียทั้งปี</div>
+            <div class="v" id="taxBig">0</div>
+            <div class="eff" id="effRate">อัตราภาษีที่แท้จริง 0.00%</div>
+          </div>
+          <div class="settle" id="settleBox">
+            <span class="pill" id="settlePill">ชำระครบแล้ว</span>
+            <span class="amt2" id="settleAmt">0</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="hd">ที่มาของตัวเลข</div>
+          <div class="bd" id="breakdown"></div>
+        </div>
+
+        <div class="card">
+          <div class="hd">ภาษีแต่ละขั้น</div>
+          <div class="bd"><div class="ladder" id="ladder"></div></div>
+        </div>
+      </aside>
+    </div>
   </div>
-  <div class="search-bar">
-    <input type="text" id="search" placeholder="ค้นหาสินค้า เช่น กระดาษ, iPhone..." oninput="filterAll()">
-    <span class="icon">🔍</span>
-  </div>
-  <div class="filter-tabs" id="tabs">
-    <button class="tab active" onclick="filterMode('all', this)">ทั้งหมด</button>
-  </div>
-  <div class="filter-tabs date-tabs" id="date-tabs">
-    <button class="tab date-tab active" onclick="filterDate('all', this)">📅 ทุกวัน</button>
-  </div>
-</div>
 
-<div class="main" id="main">
-  <div class="empty">
-    <div class="empty-icon">📦</div>
-    <div>ยังไม่มีสินค้า — รัน generate-all เพื่อเพิ่มข้อมูล</div>
+  <!-- ===== SETTINGS ===== -->
+  <div id="tab-settings" class="hide">
+    <div class="grid2" style="margin-top:28px">
+      <section class="block">
+        <h2><span class="n">A</span> อัตราภาษีขั้นบันได</h2>
+        <p class="note">“ถึง” คือขอบบนของขั้นนั้น เว้นว่างในแถวสุดท้ายเพื่อหมายถึงส่วนที่เกินขึ้นไปทั้งหมด</p>
+        <div class="scroll">
+          <table class="tbl" id="brTbl">
+            <thead><tr><th>ถึง (บาท)</th><th style="width:90px">อัตรา %</th><th style="width:28px"></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="tools"><button class="btn ghost" id="addBr">+ เพิ่มขั้น</button></div>
+
+        <h2 style="margin-top:30px"><span class="n">B</span> ค่าใช้จ่ายเงินเดือน</h2>
+        <p class="note">มาตรา 40(1)(2) หักเป็นการเหมาตามอัตรา ไม่เกินเพดาน</p>
+        <div class="rows">
+          <div class="row"><span class="lbl"><b>อัตรา (%)</b></span><span class="lead"></span>
+            <span class="fld"><input class="amt count" id="expRate" inputmode="decimal"></span></div>
+          <div class="row"><span class="lbl"><b>เพดาน (บาท)</b></span><span class="lead"></span>
+            <span class="fld"><input class="amt" id="expCap" inputmode="numeric"></span></div>
+        </div>
+
+        <h2 style="margin-top:30px"><span class="n">C</span> เพดานรวมกลุ่มเกษียณ</h2>
+        <p class="note">RMF, SSF, กองทุนสำรองเลี้ยงชีพ, กบข., ประกันบำนาญ, กอช. รวมกันแล้วห้ามเกินยอดนี้</p>
+        <div class="rows">
+          <div class="row"><span class="lbl"><b>เพดานรวม (บาท)</b></span><span class="lead"></span>
+            <span class="fld"><input class="amt" id="retireCap" inputmode="numeric"></span></div>
+          <div class="row"><span class="lbl"><b>เพดานรวมประกันชีวิต + สุขภาพตนเอง</b></span><span class="lead"></span>
+            <span class="fld"><input class="amt" id="lifeCap" inputmode="numeric"></span></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2><span class="n">D</span> รายการลดหย่อน</h2>
+        <p class="note">
+          ติ๊กช่องซ้ายสุดเพื่อเปิดหรือปิดรายการโดยไม่ต้องลบทิ้ง · “% ของเงินได้” ใส่เมื่อรายการนั้นจำกัดตามสัดส่วนรายได้ด้วย ·
+          “ต่อหน่วย” กับ “หน่วย” ใช้กับรายการที่คิดเป็นจำนวน เช่น 30,000 ต่อ “คน” หรือ 10,000 ต่อ “ล้านบาท”
+        </p>
+        <div class="scroll">
+          <table class="tbl" id="dedTbl">
+            <thead><tr>
+              <th style="width:30px">ใช้</th><th>รายการ</th><th style="width:88px">เพดาน</th><th style="width:70px">% รายได้</th>
+              <th style="width:78px">ต่อหน่วย</th><th style="width:74px">หน่วย</th><th style="width:88px">กลุ่ม</th><th style="width:28px"></th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <div class="tools">
+          <button class="btn ghost" id="addDed">+ เพิ่มรายการลดหย่อน</button>
+        </div>
+
+        <h2 style="margin-top:30px"><span class="n">E</span> จัดการปีภาษี</h2>
+        <p class="note">ทุกอย่างเก็บไว้ในเครื่องนี้เท่านั้น พอถึงปีหน้าให้สร้างปีภาษีใหม่ แล้วปรับตัวเลขตามประกาศของกรมสรรพากร</p>
+        <div class="rows">
+          <div class="row">
+            <span class="lbl"><b>สร้างปีภาษีใหม่</b><small>คัดลอกอัตราและค่าลดหย่อนทั้งหมดจากปีที่เลือกอยู่</small></span>
+            <span class="lead"></span>
+            <span class="fld">
+              <input class="amt count" id="newYear" type="text" inputmode="numeric" aria-label="ปีภาษีใหม่ พ.ศ.">
+              <button class="btn" id="cloneYear">สร้าง</button>
+            </span>
+          </div>
+        </div>
+        <div class="tools">
+          <button class="btn ghost" id="exportBtn">บันทึกไฟล์ตั้งค่า</button>
+          <button class="btn ghost" id="importBtn">โหลดไฟล์ตั้งค่า</button>
+          <button class="btn danger" id="resetYear">คืนค่าปีนี้เป็นค่าตั้งต้น</button>
+          <button class="btn danger" id="deleteYear">ลบปีนี้</button>
+        </div>
+        <p class="msg" id="setMsg" role="status"></p>
+        <input type="file" id="importFile" accept="application/json" class="hide">
+      </section>
+    </div>
   </div>
-</div>
-<div id="no-results">
-  <div style="font-size:40px">🔍</div>
-  <div>ไม่พบสินค้าที่ค้นหา</div>
+
+  <footer>
+    ตัวเลขที่ได้เป็นการประมาณการสำหรับวางแผนส่วนตัว ไม่ใช่คำแนะนำทางภาษีและไม่ใช่ยอดที่กรมสรรพากรรับรอง
+    กรณีมีเงินได้ประเภทอื่นที่ต้องหักค่าใช้จ่ายตามจริง หรือเลือกเสียภาษีแยกจากเงินได้อื่น ให้ตรวจสอบกับสรรพากรอีกครั้ง
+    ค่าลดหย่อนตั้งต้นอ้างอิงหลักเกณฑ์ที่ใช้อยู่ในปีภาษี 2567–2568 หากมีมาตรการใหม่ ให้แก้ที่แท็บตั้งค่า
+  </footer>
 </div>
 
 <script>
-const GROUPS = [{"key": "bestseller_20260502", "mode": "bestseller", "title": "5 อาหารเสริมขายดี", "keyword": "อาหารเสริม", "date": "02/05/2026", "updated": "2026-05-02T07:42:55.100538", "products": [{"rank": 1, "name": "ผลิตภัณฑ์อาหารเสริม VGA HERB วีก้า เฮิร์บ", "price_str": "฿199", "price": 199.0, "sold": "ขายแล้ว 8พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i3508120587.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/1ab4845c474c83b7a9666d71105fc14c.jpg_400x400q80.jpg"}, {"rank": 2, "name": "ใหม่ล่าสุด* Chuu ชูยู อาหารเสริมสำหรับท่านชาย", "price_str": "฿160", "price": 160.0, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5752782791.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/9b8f096be2b1c8eeac1e6f1f850e4332.jpg_400x400q80.jpg"}, {"rank": 3, "name": "อาหารเสริม OMG Emperor สูตรจักรพรรดิ โสม ถั่งเช่า", "price_str": "฿890", "price": 890.0, "sold": "ขายแล้ว 7พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i357854834.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/8c19494b99da99b35473c997a29929d5.jpg_400x400q80.jpg"}, {"rank": 4, "name": "CENTRUM SILVER 50+ HOLISTIC DIETARY SUPPLEMENT", "price_str": "฿999", "price": 999.0, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i1326160901.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/ff/kf/Saf46c36b30de4248ac3842d2c919f664r.jpg_400x400q80.jpg"}, {"rank": 5, "name": "VISTRA Magnesium Complex PLUS Vitamin วิสทร้า", "price_str": "฿270", "price": 270.0, "sold": "ขายแล้ว 2หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i123150632.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/f2bd469d8b7e066ba5645e4e4ca338ff.jpg_400x400q80.jpg"}]}, {"key": "bestseller_20260501", "mode": "bestseller", "title": "5 กระเป๋าขายดี", "keyword": "กระเป๋า", "date": "01/05/2026", "updated": "2026-05-01T21:40:51.883364", "products": [{"rank": 1, "name": "กระเป๋าสำหรับเด็กนักเรียน", "price_str": "฿35", "price": 35.0, "sold": "ขายแล้ว 9พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4863564838.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/ff/kf/S3fa71dae6a144253a134c8803d41e21ch.jpg_400x400q80.jpg"}, {"rank": 2, "name": "กระเป๋าผู้ชาย กระเป๋าสะพายไหล่", "price_str": "฿49", "price": 49.0, "sold": "ขายแล้ว 3พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4570752457.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/33dae60138bb71824f860a1c4dc9704f.jpg_400x400q80.jpg"}, {"rank": 3, "name": "กระเป๋าสะพายข้างสําหรับผู้หญิง สไตล์เกาหลี", "price_str": "฿79", "price": 79.0, "sold": "ขายแล้ว 7พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5286313960.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/48fe82174cee2c6ec2e1918add1db924.jpg_400x400q80.jpg"}, {"rank": 4, "name": "กระเป๋าสะพายไหล่ กระเป๋าสำหรับผู้หญิง", "price_str": "฿69", "price": 69.0, "sold": "ขายแล้ว 9พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5196809923.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/cd6cd439dd5c3566c5773f4add51c825.jpg_400x400q80.jpg"}, {"rank": 5, "name": "กระเป๋านักเรียนเด็กผู้หญิงดั้งเดิมเฉพาะนักศึกษาวิท", "price_str": "฿159", "price": 159.0, "sold": "ขายแล้ว 2พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5766304238.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/ab4d083628235deef99b7fb9bdf480cf.jpg_400x400q80.jpg"}]}, {"key": "beauty_20260428", "mode": "beauty", "title": "5 รองพื้นขายดี", "keyword": "รองพื้น", "date": "28/04/2026", "updated": "2026-04-28T11:23:59.178226", "products": [{"rank": 1, "name": "Merrezca Perfect Matte Foundation SPF50+/ PA++++", "price_str": "฿43", "price": 43.26, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5041314305.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5041314305.jpg"}, {"rank": 2, "name": "สินค้าพร้อมส่งจากไทย Music Flower Photo Genic", "price_str": "฿79", "price": 78.68, "sold": "ขายแล้ว 7พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4890559676.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4890559676.jpg"}, {"rank": 3, "name": "T.LI/*！！\"ครีมรองพื้น เรฟลอน คัลเลอร์สเตย์ REVLON", "price_str": "฿45", "price": 45.0, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5124071108.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5124071108.jpg"}, {"rank": 4, "name": "สินค้ามีพร้อมส่งค่ะ Music Flower Photo Genic", "price_str": "฿74", "price": 74.37, "sold": "ขายแล้ว 3พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5152803138.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5152803138.jpg"}, {"rank": 5, "name": "รองพื้นม่วง Music flower photogenic overtime", "price_str": "฿89", "price": 89.0, "sold": "ขายแล้วเก้าร้อยสิบสองชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4531283213.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4531283213.jpg"}]}, {"key": "home_20260428", "mode": "home", "title": "5 เฟอร์นิเจอร์มินิมอลขายดี", "keyword": "เฟอร์นิเจอร์มินิมอล", "date": "28/04/2026", "updated": "2026-04-28T11:20:32.061525", "products": [{"rank": 1, "name": "SM-009 โต๊ะข้างโซฟา2ชั้น โต๊ะข้างเตียงมินิมอล", "price_str": "฿70", "price": 69.9, "sold": "ขายแล้วห้าสิบเก้าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5963344145.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5963344145.jpg"}, {"rank": 2, "name": "โต๊ะพับลายการ์ตูนสไตล์มินิมอลพร้อมลิ้นชัก ขนาด", "price_str": "฿78", "price": 78.0, "sold": "ขายแล้ว 8พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4888270595.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4888270595.jpg"}, {"rank": 3, "name": "โต๊ะข้างโซฟา2ชั้น โต๊ะข้างเตียงมินิมอล", "price_str": "฿49", "price": 49.0, "sold": "ขายแล้วหนึ่งร้อยยี่สิบเอ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i6075781151.html?t=p-i5WHa7P-sNKs264", "image": "images/item_6075781151.jpg"}, {"rank": 4, "name": "SellerHM โต๊ะ ห้องทำงาน โต๊ะทำงาน", "price_str": "฿109", "price": 109.25, "sold": "ขายแล้วแปดสิบเก้าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i6008045368.html?t=p-i5WHa7P-sNKs264", "image": "images/item_6008045368.jpg"}, {"rank": 5, "name": "โต๊ะทำงาน โต๊ะคอมพิวเตอร์ โต๊ะคอม", "price_str": "฿237", "price": 237.0, "sold": "ขายแล้วหนึ่งร้อยหกชิ้น", "url": "https://www.lazada.co.th/products/pdp-i16046572093.html?t=p-i5WHa7P-sNKs264", "image": "images/item_16046572093.jpg"}]}, {"key": "toprated_20260428", "mode": "toprated", "title": "5 มาส์กหน้าคะแนนดีสุด", "keyword": "มาส์กหน้า", "date": "28/04/2026", "updated": "2026-04-28T11:16:25.627244", "products": [{"rank": 1, "name": "YTL แผ่นมาร์คหน้า มาส์กส่วนผสมธรรมชาติ", "price_str": "฿3", "price": 2.87, "sold": "ขายแล้ว 6พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4514008294.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4514008294.jpg"}, {"rank": 2, "name": "แผ่นมาส์กหน้า Rojukiss Mask มาสก์หน้า โรจูคิส", "price_str": "฿20", "price": 20.0, "sold": "ขายแล้ว 3หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4983645392.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4983645392.jpg"}, {"rank": 3, "name": "Innisfree My Real Squeeze Mask มาส์กหน้า", "price_str": "฿9", "price": 9.0, "sold": "ขายแล้ว 2หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4025432866.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4025432866.jpg"}, {"rank": 4, "name": "LEADERS Regeneration Mask แผ่นมาส์กหน้า 28ml", "price_str": "฿34", "price": 34.0, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i3503454651.html?t=p-i5WHa7P-sNKs264", "image": "images/item_3503454651.jpg"}, {"rank": 5, "name": "Baby Bright บูสเตอร์มาส์กชีท 20g เบบี้ไบร์ท", "price_str": "฿20", "price": 20.0, "sold": "ขายแล้ว 5พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4958938117.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4958938117.jpg"}]}, {"key": "kids_20260428", "mode": "kids", "title": "5 ของเล่นบทบาทสมมติขายดี", "keyword": "ของเล่นบทบาทสมมติ", "date": "28/04/2026", "updated": "2026-04-28T11:12:57.575697", "products": [{"rank": 1, "name": "GIORGIONE กล่องหมีสนุก ของเล่นให้อาหาร บทบาทสมมติ", "price_str": "฿55", "price": 55.2, "sold": "ขายแล้วหนึ่งร้อยยี่สิบห้าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5839648593.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5839648593.jpg"}, {"rank": 2, "name": "ของเล่นเด็กมอนเตสซอรี่สำหรับเด็กผู้หญิงเด็กผู้ชาย", "price_str": "฿92", "price": 92.43, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i16104908873.html?t=p-i5WHa7P-sNKs264", "image": "images/item_16104908873.jpg"}, {"rank": 3, "name": "AOJU ของเล่นสำหรับเกมบทบาท บทบาทสมมติ", "price_str": "฿24", "price": 24.25, "sold": "ขายแล้วแปดร้อยเก้าสิบแปดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5853390976.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5853390976.jpg"}, {"rank": 4, "name": "Yuecomfly หุ่นยนต์ของเล่น บทบาทสมมติ", "price_str": "฿44", "price": 44.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5928852853.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5928852853.jpg"}, {"rank": 5, "name": "BB-STORE ”Fruits” ของเล่นไม้หั่นผลไม้", "price_str": "฿49", "price": 49.0, "sold": "ขายแล้วเก้าร้อยแปดสิบเจ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i2865674673.html?t=p-i5WHa7P-sNKs264", "image": "images/item_2865674673.jpg"}]}, {"key": "bestseller_20260428", "mode": "bestseller", "title": "5 หมอนหนุนขายดี", "keyword": "หมอนหนุน", "date": "28/04/2026", "updated": "2026-04-28T11:09:15.716287", "products": [{"rank": 1, "name": "หมอนหนุน หมอนหนุนขาว หมอนหนุนใยสังเคราะห์เด้ง", "price_str": "฿54", "price": 54.12, "sold": "ขายแล้วสองร้อยแปดสิบหกชิ้น", "url": "https://www.lazada.co.th/products/pdp-i3581265892.html?t=p-i5WHa7P-sNKs264", "image": "images/item_3581265892.jpg"}, {"rank": 2, "name": "หมอนหนุน หมอนหนุนสูญญากาศ หมอนหนุนใยสังเคราะห์", "price_str": "฿54", "price": 54.12, "sold": "ขายแล้วสองร้อยเจ็ดสิบแปดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4698354140.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4698354140.jpg"}, {"rank": 3, "name": "หมอหนุน หมอนพิมพ์ลายกาตูนน่ารักราคาโรงงานถูกสุดๆ", "price_str": "฿62", "price": 62.46, "sold": "ขายแล้ว 4พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4973024860.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4973024860.jpg"}, {"rank": 4, "name": "หมอนหนุน หมอนข้างใบใหญ่ขนาดมาตรฐาน", "price_str": "฿62", "price": 62.46, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5680417839.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5680417839.jpg"}]}, {"key": "collectible_20260427", "mode": "collectible", "title": "5 ฟิกเกอร์อนิเมะพรีเมียม", "keyword": "ฟิกเกอร์อนิเมะ", "date": "27/04/2026", "updated": "2026-04-27T12:54:31.357399", "products": [{"rank": 1, "name": "Model โมเดล Figure ฟิกเกอร์ SkyTube T2 Art Girls", "price_str": "฿2,525", "price": 2525.0, "sold": "ขายแล้วเจ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i1632968797.html?t=p-i5WHa7P-sNKs264", "image": "images/item_1632968797.jpg"}, {"rank": 2, "name": "Figure ฟิกเกอร์ BINDing Native", "price_str": "฿2,520", "price": 2520.0, "sold": "ขายแล้วเจ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4157307303.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4157307303.jpg"}, {"rank": 3, "name": "Figure ฟิกเกอร์ By SkyTube สกายทูป", "price_str": "฿2,290", "price": 2290.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i4157204637.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4157204637.jpg"}, {"rank": 4, "name": "ABYStyle ฟิกเกอร์ ฟิกเกอร์อนิเมะ โมเดล Death Note", "price_str": "฿1,899", "price": 1899.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5486976514.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5486976514.jpg"}, {"rank": 5, "name": "Bandai โมเดลฟิกเกอร์อนิเมะฮิเมโกะจาก Honkai: Star", "price_str": "฿1,253", "price": 1253.49, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i16116467299.html?t=p-i5WHa7P-sNKs264", "image": "images/item_16116467299.jpg"}]}, {"key": "limited_20260427", "mode": "limited", "title": "5 ของแต่งบ้านพรีเมียม", "keyword": "ของแต่งบ้าน", "date": "27/04/2026", "updated": "2026-04-27T12:38:09.264923", "products": [{"rank": 1, "name": "แผ่นไม้ แกะสลัก รูป มือดอกบัว แขวนผนัง ไม้แกะสลัก", "price_str": "฿11,055", "price": 11055.3, "sold": "ขายแล้วหกสิบสองชิ้น", "url": "https://www.lazada.co.th/products/pdp-i567288994.html?t=p-i5WHa7P-sNKs264", "image": "images/item_567288994.jpg"}, {"rank": 2, "name": "กรอบรูป กรอบลอย รูปภาพ เสริมมงคล ภาพแต่งบ้าน", "price_str": "฿3,200", "price": 3200.0, "sold": "ขายแล้วเก้าสิบสี่ชิ้น", "url": "https://www.lazada.co.th/products/pdp-i257630256.html?t=p-i5WHa7P-sNKs264", "image": "images/item_257630256.jpg"}, {"rank": 3, "name": "การตกแต่งผนังโลหะรูปใบบัวแบบ3D", "price_str": "฿3,184", "price": 3184.04, "sold": "ขายแล้วสิบเก้าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5760444052.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5760444052.jpg"}, {"rank": 4, "name": "ชุดศิลปะบนผนังโลหะฟลามิงโกขนาดใหญ่2ชิ้นเครื่องตกแต", "price_str": "฿2,883", "price": 2883.3, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i16091825003.html?t=p-i5WHa7P-sNKs264", "image": "images/item_16091825003.jpg"}, {"rank": 5, "name": "ใบไม้ตกแต่งผนังสไตล์โบฮีเมียน", "price_str": "฿1,835", "price": 1835.4, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5850216120.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5850216120.jpg"}]}, {"key": "cheapest_20260427", "mode": "cheapest", "title": "5 เครื่องเขียนราคาถูกสุด", "keyword": "เครื่องเขียน", "date": "27/04/2026", "updated": "2026-04-27T11:11:27.235043", "products": [{"rank": 1, "name": "ราคาถูกสุด ปากกาเจล 0.5mm แบบหัวปกติ และหัวเข็ม", "price_str": "฿1", "price": 1.0, "sold": "ขายแล้ว 1ล้านกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i3349676703.html?t=p-i5WHa7P-sNKs264", "image": "images/item_3349676703.jpg"}, {"rank": 2, "name": "ปากกาลบได้ ลายการ์ตูนน่ารัก 0.5พร้อมส่ง", "price_str": "฿4", "price": 4.5, "sold": "ขายแล้ว 2หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4782157412.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4782157412.jpg"}, {"rank": 3, "name": "น่ารักๆ ชุดเครื่องเขียน pencil cartoon 5 ชิ้น", "price_str": "฿6", "price": 5.5, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5027360103.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5027360103.jpg"}, {"rank": 4, "name": "เครื่องเขียน อุปกรณ์การเรียนพกพา 5 ชิ้น", "price_str": "฿6", "price": 6.0, "sold": "ขายแล้ว 3หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4754998459.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4754998459.jpg"}, {"rank": 5, "name": "หัวขายดีสองชั้นสำหรับปากกาเน้นข้อความแบบหัวคู่6สีป", "price_str": "฿8", "price": 8.0, "sold": "ขายแล้ว 4หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4832748273.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4832748273.jpg"}]}, {"key": "newest_20260427", "mode": "newest", "title": "5 ของเล่นมาใหม่", "keyword": "ของเล่น", "date": "27/04/2026", "updated": "2026-04-27T11:06:31.690273", "products": [{"rank": 1, "name": "73pcs ของเล่นทำอาหาร ชุดของเล่นทำอาหาร", "price_str": "฿4", "price": 4.0, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4676526265.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4676526265.jpg"}, {"rank": 2, "name": "ชุดของเล่น ส้มตำใจดีชุดเล็ก mini set", "price_str": "฿94", "price": 94.05, "sold": "ขายแล้วสองร้อยแปดสิบสองชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5853843133.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5853843133.jpg"}, {"rank": 3, "name": "ของเล่นตกปลา บ่อตกปลา ตกปลาครบชุด 40/50 ชิ้น", "price_str": "฿46", "price": 46.0, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5112834388.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5112834388.jpg"}, {"rank": 4, "name": "พร้อมส่งในไทย ของเล่นกิ๊บเซ็ทDIY", "price_str": "฿33", "price": 33.41, "sold": "ขายแล้วเจ็ดร้อยสี่สิบชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5464628297.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5464628297.jpg"}, {"rank": 5, "name": "CODบาร์บีคิวจำลองสำหรับเด็ก แกล้งเกม", "price_str": "฿65", "price": 65.0, "sold": "ขายแล้ว 7พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i2475246445.html?t=p-i5WHa7P-sNKs264", "image": "images/item_2475246445.jpg"}]}, {"key": "bestseller_20260427", "mode": "bestseller", "title": "5 ผ้าเช็ดตัวขายดี", "keyword": "ผ้าเช็ดตัว", "date": "27/04/2026", "updated": "2026-04-27T11:02:13.065439", "products": [{"rank": 1, "name": "ผ้าเช็ดตัว ผ้าขนหนู ลายการ์ตูน ลายหมี LM.BEAR", "price_str": "฿17", "price": 17.22, "sold": "ขายแล้วสี่ร้อยหกสิบสองชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5229104824.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5229104824.jpg"}, {"rank": 2, "name": "ผ้าเช็ดตัว เนื้อผ้าหนา COTTON 100% ซับน้ำได้ดี", "price_str": "฿25", "price": 25.0, "sold": "ขายแล้ว 3พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5196870890.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5196870890.jpg"}, {"rank": 3, "name": "ผ้าเช็ดตัวนาโน 140x70 ซม.ผ้าขนหนู ผ้าเช็ดตัว", "price_str": "฿17", "price": 16.67, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5117716097.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5117716097.jpg"}, {"rank": 4, "name": "ผ้าเช็ดตัว ผ้าขนหนู ผืนใหญ่ ลายริ้วใหญ่", "price_str": "฿49", "price": 49.0, "sold": "ขายแล้ว 9พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5263122802.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5263122802.jpg"}, {"rank": 5, "name": "ผ้าเช็ดตัวขนเป็ดลายริ้วขนาด 70x140 ซับน้ำ 12", "price_str": "฿45", "price": 44.53, "sold": "ขายแล้วสองร้อยยี่สิบสองชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5758585984.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5758585984.jpg"}]}, {"key": "expensive_20260426", "mode": "expensive", "title": "5 เครื่องออกกำลังกายพรีเมียม", "keyword": "เครื่องออกกำลังกาย", "date": "26/04/2026", "updated": "2026-04-26T17:04:46.104246", "products": [{"rank": 1, "name": "MA-29 – เครื่อง Multi-Press Pin-Load – IVADE –", "price_str": "฿45,800", "price": 45800.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5752901479.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/91867899901a13944cbc36d449a5dd6c.png_400x400q80.png"}, {"rank": 2, "name": "สมิทแมชชีน รุ่น S230 - เครื่องออกกำลังกายแบรนด์", "price_str": "฿39,800", "price": 39800.0, "sold": "ขายแล้วยี่สิบเอ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5741713333.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/4d687613a8403fe0bb107049e74381b8.png_400x400q80.png"}, {"rank": 3, "name": "PB-410 PeachBuilder Multi Hip Extension -", "price_str": "฿39,800", "price": 39800.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5883186772.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/8fd89305b814d711a5fb6e68c8d1653a.png_400x400q80.png"}, {"rank": 4, "name": "เครื่องออกกำลังกาย รุ่น Single Cable Core Plus", "price_str": "฿12,900", "price": 12900.0, "sold": "ขายแล้วเก้าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i6035483612.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/57b22eddc182b2fefe156e4ba6b3b868.jpg_400x400q80.jpg"}, {"rank": 5, "name": "ลู่วิ่งไฟฟ้า ลู่วิ่ง C2 ปรับความชันไฟฟ้า 20°", "price_str": "฿12,057", "price": 12057.24, "sold": "ขายแล้วหนึ่งร้อยสี่สิบสองชิ้น", "url": "https://www.lazada.co.th/products/pdp-i16111920457.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/abb59595487ec0a3f0038080a3df271e.jpg_400x400q80.jpg"}]}, {"key": "cheapest_20260426", "mode": "cheapest", "title": "5 เครื่องปรุงอาหารราคาถูกสุด", "keyword": "เครื่องปรุงอาหาร", "date": "26/04/2026", "updated": "2026-04-26T16:26:56.286436", "products": [{"rank": 1, "name": "ผงปรุงรส ผงเขย่า มีหลายรสให้เลือก", "price_str": "฿12", "price": 12.0, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i3260967419.html?t=p-i5WHa7P-sNKs264", "image": "images/item_3260967419.jpg"}, {"rank": 2, "name": "พริกแกงเรือนไทย 50 g ซีลสุญญากาศ รสกลมกล่อม อร่อย", "price_str": "฿12", "price": 12.0, "sold": "ขายแล้ว 4พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i2460616127.html?t=p-i5WHa7P-sNKs264", "image": "images/item_2460616127.jpg"}, {"rank": 3, "name": "RosDee Menu รสดีเมนู หมัก แกง ลาบ พะโล้", "price_str": "฿20", "price": 20.0, "sold": "ขายแล้ว 2หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i2763741806.html?t=p-i5WHa7P-sNKs264", "image": "images/item_2763741806.jpg"}, {"rank": 4, "name": "i-Chef ไอเชฟ เครื่องปรุงสำเร็จ", "price_str": "฿20", "price": 20.0, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4657190674.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4657190674.jpg"}, {"rank": 5, "name": "FaThai ฟ้าไทย โฮม คิทเช่น ซอสปรุงสำเร็จรูป 75", "price_str": "฿20", "price": 20.0, "sold": "ขายแล้วหกร้อยเจ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5123710136.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5123710136.jpg"}]}, {"key": "pet_20260426", "mode": "pet", "title": "5 ของเล่นสุนัขขายดี", "keyword": "ของเล่นสุนัข", "date": "26/04/2026", "updated": "2026-04-26T16:20:21.938754", "products": [{"rank": 1, "name": "ของเล่นสุนัขยางเคี้ยวของเล่นแบบอินเทอร์แอคทีฟและไม", "price_str": "฿105", "price": 105.45, "sold": "ขายแล้วหกสิบสี่ชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5776875241.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5776875241.jpg"}, {"rank": 2, "name": "Cori Petto สินค้าพร้อมส่ง ของเล่นสุนัข เชือกกัด", "price_str": "฿89", "price": 89.0, "sold": "ขายแล้วเก้าร้อยสิบหกชิ้น", "url": "https://www.lazada.co.th/products/pdp-i2608329737.html?t=p-i5WHa7P-sNKs264", "image": "images/item_2608329737.jpg"}, {"rank": 3, "name": "ของเล่นสุนัข ของเล่นสัตว์เลี้ยง ไก่โอ็ก ตัวใหญ่", "price_str": "฿35", "price": 35.0, "sold": "ขายแล้วสองร้อยแปดสิบหกชิ้น", "url": "https://www.lazada.co.th/products/pdp-i2412942063.html?t=p-i5WHa7P-sNKs264", "image": "images/item_2412942063.jpg"}, {"rank": 4, "name": "Cori Petto สินค้าพร้อมส่ง สต๊อกไทย ของเล่นสุนัข", "price_str": "฿100", "price": 100.0, "sold": "ขายแล้วสามร้อยสี่สิบเก้าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i2633231543.html?t=p-i5WHa7P-sNKs264", "image": "images/item_2633231543.jpg"}, {"rank": 5, "name": "หนังวัวอัดกระดูกChompers กระดูกสุนัข ของเล่นสุนัข", "price_str": "฿39", "price": 39.0, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5336194984.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5336194984.jpg"}]}, {"key": "collectible_20260426", "mode": "collectible", "title": "5 โมเดลรถพรีเมียม", "keyword": "โมเดลรถ", "date": "26/04/2026", "updated": "2026-04-26T16:17:10.670608", "products": [{"rank": 1, "name": "โมเดลรถโลหะอัลลอยด์ขนาด 1:64 YES ISUZU ELF", "price_str": "฿2,060", "price": 2059.6, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i16115909104.html?t=p-i5WHa7P-sNKs264", "image": "images/item_16115909104.jpg"}, {"rank": 2, "name": "โมเดลรถเหล็ก 1/24 2003 Nissan 350Z", "price_str": "฿1,790", "price": 1790.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5574830310.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5574830310.jpg"}, {"rank": 3, "name": "โมเดลรถเหล็ก 1/24 1970 Dodge Charger", "price_str": "฿1,590", "price": 1590.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5575651399.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5575651399.jpg"}, {"rank": 4, "name": "โมเดลรถเหล็ก Hot Wheels Premium Formula 1 Racing", "price_str": "฿1,390", "price": 1390.0, "sold": "ขายแล้วแปดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5824167707.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5824167707.jpg"}, {"rank": 5, "name": "โมเดลรถเหล็ก 1/24 1967 Shelby GT-500", "price_str": "฿1,390", "price": 1390.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5575273361.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5575273361.jpg"}]}, {"key": "bestseller_20260426", "mode": "bestseller", "title": "5 กระเป๋าขายดี", "keyword": "กระเป๋า", "date": "26/04/2026", "updated": "2026-04-26T16:10:11.803432", "products": [{"rank": 1, "name": "FXSAXUNN กระเป๋าแฟชั่นสตรีกระเป๋าสะพายข้างหนึ่ง,", "price_str": "฿79", "price": 78.85, "sold": "ขายแล้ว 8พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5949973780.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5949973780.jpg"}, {"rank": 2, "name": "กระเป๋าผู้หญิงภายในกระเป๋าสะพายไหล่ใบเล็กอเนกประสง", "price_str": "฿40", "price": 40.0, "sold": "ขายแล้ว 3หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4863669418.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4863669418.jpg"}, {"rank": 3, "name": "Aideng กระเป๋าผู้หญิง กระเป๋าคาดอก", "price_str": "฿41", "price": 41.46, "sold": "ขายแล้ว 2พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4486390867.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4486390867.jpg"}, {"rank": 4, "name": "กระเป๋าสำหรับเด็กนักเรียน", "price_str": "฿49", "price": 49.0, "sold": "ขายแล้ว 9พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4863564838.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4863564838.jpg"}, {"rank": 5, "name": "กระเป๋าผู้ชาย กระเป๋าสะพายไหล่", "price_str": "฿44", "price": 44.17, "sold": "ขายแล้ว 3พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4570752457.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4570752457.jpg"}]}, {"key": "newest_20260425", "mode": "newest", "title": "5 สินค้ามาใหม่", "keyword": "สินค้าใหม่", "date": "25/04/2026", "updated": "2026-04-25T15:33:28.227891", "products": [{"rank": 1, "name": "MOMO Cat โมโม่ แคท อาหารแมว ขนาด 7 Kg. 14 kg.และ", "price_str": "฿315", "price": 315.0, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5368671414.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5368671414.jpg"}, {"rank": 2, "name": "TWS รุ่นใหม่ทนกว่าเดิม หูฟังบลูทูธ", "price_str": "฿51", "price": 50.98, "sold": "ขายแล้ว 1แสนชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5510033058.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5510033058.jpg"}, {"rank": 3, "name": "Muse Harbor เสื้อกล้ามผู้ชายฤดูร้อนระบายอากาศกีฬาฟ", "price_str": "฿17", "price": 16.8, "sold": "ขายแล้ว 1แสนชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5643187878.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5643187878.jpg"}, {"rank": 4, "name": "DEESTONE ยางรถยนต์ รุ่น R702 4 เส้น", "price_str": "฿6,120", "price": 6120.0, "sold": "ขายแล้ว 2พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i140923404.html?t=p-i5WHa7P-sNKs264", "image": "images/item_140923404.jpg"}, {"rank": 5, "name": "Janet เก้าอี้พับ Kermit chair Top Sun", "price_str": "฿450", "price": 450.0, "sold": "ขายแล้ว 2พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5627269694.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5627269694.jpg"}]}, {"key": "limited_20260425", "mode": "limited", "title": "5 ของลิมิเต็ดที่น่าสะสม", "keyword": "ลิมิเต็ด", "date": "25/04/2026", "updated": "2026-04-25T15:29:20.051748", "products": [{"rank": 1, "name": "เฟืองท้ายเต็ด ลิมิเต็ด ดีแม็ก ISUZU D-max 11x41", "price_str": "฿11,529", "price": 11528.63, "sold": "ขายแล้วหกชิ้น", "url": "https://www.lazada.co.th/products/pdp-i2066902640.html?t=p-i5WHa7P-sNKs264", "image": "images/item_2066902640.jpg"}, {"rank": 2, "name": "ลิมิเต็ดสลิป ISUZU D-MAX ดีแม็ค คอมมอลเรล", "price_str": "฿5,495", "price": 5495.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5909451563.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5909451563.jpg"}, {"rank": 3, "name": "ดอกจอกลิมิเต็ด ฟอร์ด WL 12วาล์ว เรนเจอร์ ไฟเตอร์", "price_str": "฿4,655", "price": 4655.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i6043609748.html?t=p-i5WHa7P-sNKs264", "image": "images/item_6043609748.jpg"}, {"rank": 4, "name": "Crocs Zootopia Clog Clog", "price_str": "฿4,360", "price": 4360.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i6003929685.html?t=p-i5WHa7P-sNKs264", "image": "images/item_6003929685.jpg"}, {"rank": 5, "name": "Joma รองเท้าฟุตซอลในร่มพื้นยาง", "price_str": "฿3,800", "price": 3800.16, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i6011084251.html?t=p-i5WHa7P-sNKs264", "image": "images/item_6011084251.jpg"}]}, {"key": "collectible_20260425", "mode": "collectible", "title": "5 ของสะสมสุดเจ๋ง", "keyword": "ของสะสม", "date": "25/04/2026", "updated": "2026-04-25T15:25:28.734455", "products": [{"rank": 1, "name": "Bandai MEGAHOUSE PORTRAIT.OF.PIRATES ONE PIECE", "price_str": "฿9,560", "price": 9560.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5841841979.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5841841979.jpg"}, {"rank": 2, "name": "Bandai TAMASHII S.H.MONSTERARTS SHIMO FROM", "price_str": "฿5,779", "price": 5779.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5586480865.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5586480865.jpg"}, {"rank": 3, "name": "One Piece Luffy Action Figure 60CM", "price_str": "฿4,598", "price": 4598.0, "sold": "ขายแล้วหนึ่งร้อยแปดสิบเจ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5720580908.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5720580908.jpg"}, {"rank": 4, "name": "วันพีชชุดหนวดขาว ของแท้ โมเดลของสะสม Onepiece", "price_str": "฿3,390", "price": 3390.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i6062402181.html?t=p-i5WHa7P-sNKs264", "image": "images/item_6062402181.jpg"}, {"rank": 5, "name": "Maisto 1:18 2021 Ford Bronco Wildtrak โมเดลรถยนต์", "price_str": "฿1,899", "price": 1899.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i4170069361.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4170069361.jpg"}]}, {"key": "cheapest_20260425", "mode": "cheapest", "title": "5 สินค้าราคาถูกสุด", "keyword": "ราคาถูก", "date": "25/04/2026", "updated": "2026-04-25T15:21:06.518985", "products": [{"rank": 1, "name": "กระดาษทิชชูพกพา 210 แผ่น/ห่อ 4ชั้น", "price_str": "฿4", "price": 4.0, "sold": "ขายแล้ว 3พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5226318355.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5226318355.jpg"}, {"rank": 2, "name": "มาม่า ส่งไว พร้อมส่ง บะหมี่กึ่งสำเร็จรูป", "price_str": "฿9", "price": 9.0, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4234951320.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4234951320.jpg"}, {"rank": 3, "name": "ขายดีที่สุดน้ำหอม ขนาดพกพา ทดลอง 2มล Perfumes", "price_str": "฿10", "price": 9.9, "sold": "ขายแล้ว 1แสนชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5378833212.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5378833212.jpg"}, {"rank": 4, "name": "Muse Harbor เสื้อกล้ามผู้ชายฤดูร้อนระบายอากาศกีฬาฟ", "price_str": "฿17", "price": 16.8, "sold": "ขายแล้ว 1แสนชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5643187878.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5643187878.jpg"}, {"rank": 5, "name": "Muse Harbor เสื้อยืดผู้ชายแขนสั้นผ้าไหมไอซ์ฤดูร้อน", "price_str": "฿28", "price": 28.0, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5694627751.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5694627751.jpg"}]}, {"key": "health_20260429", "mode": "health", "title": "5 ครีมดูแลผิวขายดี", "keyword": "ครีมดูแลผิว", "date": "29/04/2026", "updated": "2026-04-29T13:42:55.919575", "products": [{"rank": 1, "name": "ซื้อ 2 แถม 1 ครีมทาเชื้อรา 20g เหมาะสำหรับโรคกลาก", "price_str": "฿155", "price": 155.31, "sold": "ขายแล้วสี่สิบสี่ชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5899669666.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/6be6808e1ee5653aa28132ee5f0573d2.jpg_400x400q80.jpg"}, {"rank": 2, "name": "ครีมลดอาการคัน ทาแก้คัน ผิวหนังทากากเกลื้อน", "price_str": "฿137", "price": 136.93, "sold": "ขายแล้วหนึ่งร้อยเก้าสิบเอ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5820026964.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/ff543a6534cc7d103321da08faf6edf4.jpg_400x400q80.jpg"}, {"rank": 3, "name": "ครีมพญายอ&สมุนไพรสกัด ผสมเซราไมด์ ผิวแพ้ แห้งคัน", "price_str": "฿169", "price": 169.0, "sold": "ขายแล้ว 2พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5134428386.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/570980552b87e232de9cec60f12d4c52.jpg_400x400q80.jpg"}, {"rank": 4, "name": "ซื้อ 1 แถม 1 ครีมแก้คัน ครีมลดอาการคัน", "price_str": "฿159", "price": 159.0, "sold": "ขายแล้วยี่สิบเก้าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5908939021.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/50d6c7f6461c764d2b081c78321acaf2.jpg_400x400q80.jpg"}, {"rank": 5, "name": "โลชั่นบํารุงผิวกาย UHC สําหรับบํารุงผิวกาย", "price_str": "฿14", "price": 13.77, "sold": "ขายแล้วสามร้อยเก้าสิบแปดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5841520904.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/087368b0b18b12545506edec1aa334f9.jpg_400x400q80.jpg"}]}, {"key": "gadget_20260429", "mode": "gadget", "title": "5 powerbankขายดี", "keyword": "powerbank", "date": "29/04/2026", "updated": "2026-04-29T13:42:47.702480", "products": [{"rank": 1, "name": "power bank ชาร์จ1ครั้ง ใช้ได้1สัปดาห์ เพาเวอร์", "price_str": "฿159", "price": 159.0, "sold": "ขายแล้ว 6พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5794506678.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/6a322959a7b08488a5da9691e80186fb.png_400x400q80.png"}, {"rank": 2, "name": "UGREEN 20W 10000mAh 20000mAh พาวเวอร์แบงค์", "price_str": "฿590", "price": 590.0, "sold": "ขายแล้ว 4พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5547602692.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/1c302c17e46b64e94e0f32683d9a6835.jpg_400x400q80.jpg"}, {"rank": 3, "name": "Orsen EW54 EW55 E53 E43 E59 powerbank 10000mAh", "price_str": "฿610", "price": 610.0, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4284910113.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/f124379d042e79e6bfa8df64c5e0847d.png_400x400q80.png"}, {"rank": 4, "name": "Orsen EW54 EW55 E53 E43 E59 powerbank 10000mAh", "price_str": "฿610", "price": 610.0, "sold": "ขายแล้ว 2หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i3822040634.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/a6bf66b63dec9f2290f2d00c1127fa8a.png_400x400q80.png"}, {"rank": 5, "name": "Orsen E29 / E29 Ultra power bank PD 45W Max", "price_str": "฿1,249", "price": 1249.0, "sold": "ขายแล้ว 8พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i1841254191.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/82e446018e08a3624d814c5d7ef28274.png_400x400q80.png"}]}, {"key": "toprated_20260429", "mode": "toprated", "title": "5 ผลิตภัณฑ์ดูแลเส้นผมคะแนนดีสุด", "keyword": "ผลิตภัณฑ์ดูแลเส้นผม", "date": "29/04/2026", "updated": "2026-04-29T13:42:39.125377", "products": [{"rank": 1, "name": "ครีมยืดผมตรงดูแลเส้นผมสูตรคาเวียร์เคราติน", "price_str": "฿167", "price": 167.41, "sold": "ขายแล้วสิบหนึ่งชิ้น", "url": "https://www.lazada.co.th/products/pdp-i16099542516.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/31c7282bf5f1f6cde5292ebe4a701d03.jpg_400x400q80.jpg"}, {"rank": 2, "name": "K18 Leave-In Molecular Repair Hair Mask 50ML", "price_str": "฿202", "price": 202.3, "sold": "ขายแล้วหนึ่งร้อยหกสิบเก้าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5535919105.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/00a1635d9535a73cf0fa50b7999f1c74.png_400x400q80.png"}, {"rank": 3, "name": "Schwarzkopf Professionnelle Repair & Shine แชมพู", "price_str": "฿300", "price": 300.0, "sold": "ขายแล้วหกชิ้น", "url": "https://www.lazada.co.th/products/pdp-i16111988334.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/b301fec721954ea1efa7cfbb48049627.png_400x400q80.png"}, {"rank": 4, "name": "เคราตินสดผมตรง FROM BRAZIL ชุดเคราติน ยืดผม", "price_str": "฿389", "price": 389.0, "sold": "ขายแล้วหนึ่งร้อยยี่สิบเอ็ดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5335696272.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/71c6a7c61c0cf709cde869f9fb97a346.jpg_400x400q80.jpg"}, {"rank": 5, "name": "สมุนไพรบัวเงิน เซรั่มบำรุงเส้นผม", "price_str": "฿32", "price": 32.0, "sold": "ขายแล้วหนึ่งร้อยหกสิบแปดชิ้น", "url": "https://www.lazada.co.th/products/pdp-i2939053231.html?t=p-i5WHa7P-sNKs264", "image": "https://img.lazcdn.com/g/p/5a01a95befb19bc61c7fd6162e5f9f77.jpg_400x400q80.jpg"}]}, {"key": "cheapest_20260429", "mode": "cheapest", "title": "5 ลิปกลอสราคาถูก", "keyword": "ลิปกลอสราคาถูก", "date": "29/04/2026", "updated": "2026-04-29T13:42:33.574431", "products": [{"rank": 1, "name": "Lameilaลิปกลอสเนื้อกำมะหยี่ ติดทนนาน", "price_str": "฿8", "price": 8.35, "sold": "ขายแล้ว 1แสนชิ้น", "url": "https://www.lazada.co.th/products/pdp-i3180034650.html?t=p-i5WHa7P-sNKs264", "image": "images/item_3180034650.jpg"}, {"rank": 2, "name": "Yicenmy Kekemood ลิปกลอสเนื้อกระจก ฉ่ำวาว", "price_str": "฿8", "price": 8.5, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i16128890801.html?t=p-i5WHa7P-sNKs264", "image": "images/item_16128890801.jpg"}, {"rank": 3, "name": "ลิปเคลือบริมฝีปากสีดอกกุหลาบลิปกลอสด้านติดทนนานรอย", "price_str": "฿10", "price": 10.19, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5651908945.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5651908945.jpg"}, {"rank": 4, "name": "Gege Bear - ลิปกลอส ลิปสติก ชุด3 ชิ้น ฉ่ำวาว", "price_str": "฿13", "price": 13.0, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5286312904.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5286312904.jpg"}]}, {"key": "bestseller_20260429", "mode": "bestseller", "title": "5 เสื้อผ้าผู้หญิงขายดี", "keyword": "เสื้อผ้าผู้หญิง", "date": "29/04/2026", "updated": "2026-04-29T13:41:22.256580", "products": [{"rank": 1, "name": "Elle เสื้อยืดแขนสั้นแบบไร้แขน", "price_str": "฿1,097", "price": 1097.2, "sold": "ขายแล้วสองร้อยสิบหกชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5878538695.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5878538695.jpg"}, {"rank": 2, "name": "เสื้อยืดแขนสั้น/เสื้อคอกลม สวมใส่สบาย", "price_str": "฿49", "price": 49.0, "sold": "ขายแล้ว 4พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5004213742.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5004213742.jpg"}, {"rank": 3, "name": "เสื้อเเขนสั้นผู้หญิง เสื้อยืดผู้หญิง", "price_str": "฿49", "price": 49.0, "sold": "ขายแล้ว 1พันกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i5637673365.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5637673365.jpg"}, {"rank": 4, "name": "เสื้อยืดแขนสั้น พิมพ์ลายดอกไม้ แฟชั่นฤดูร้อน ใหม่", "price_str": "฿38", "price": 38.0, "sold": "ขายแล้ว 2หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i4993673457.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4993673457.jpg"}, {"rank": 5, "name": "Hender เสื้อยืดแขนสั้นสไตล์เกาหลี", "price_str": "฿50", "price": 50.0, "sold": "ขายแล้ว 1หมื่นกว่าชิ้น", "url": "https://www.lazada.co.th/products/pdp-i1845442473.html?t=p-i5WHa7P-sNKs264", "image": "images/item_1845442473.jpg"}]}, {"key": "kids_20260430", "mode": "bestseller", "title": "5 เสื้อผ้าเด็กขายดี", "keyword": "เสื้อผ้าเด็ก", "date": "30/04/2026", "updated": "2026-04-30T22:23:03.006596", "products": [{"rank": 1, "name": "ชุดรอมเปอร์แขนสั้นสำหรับ…", "price_str": "฿48", "price": 48.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5530188080.html?t=p-i5WHa7P-sNKs264", "image": "images/item_16119156661.jpg"}, {"rank": 2, "name": "ชุดนอนเด็กชายเด็กผู้หญิง…", "price_str": "฿73", "price": 73.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i4228165434.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4616217225.jpg"}, {"rank": 3, "name": "ชุดกีฬาเด็ก ชุดบาสเด็ก ช…", "price_str": "฿46", "price": 46.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i4616217225.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5867694664.jpg"}, {"rank": 4, "name": "YY212 เสื้อผ้าเด็กเล็ก ช…", "price_str": "฿48", "price": 48.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i4622347767.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5201441088.jpg"}, {"rank": 5, "name": "MLE001 kiss baby SALEtop…", "price_str": "฿30", "price": 30.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i1098180016.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5326595688.jpg"}]}, {"key": "lotion_20260430", "mode": "bestseller", "title": "5 โลชั่นทาตัวขายดี", "keyword": "โลชั่นทาตัว", "date": "30/04/2026", "updated": "2026-04-30T22:23:03.006766", "products": [{"rank": 1, "name": "เพียวรีน เบบี้โลชั่น 500…", "price_str": "฿185", "price": 185.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5531868596.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5531868596.jpg"}, {"rank": 2, "name": "Garnier Body Lotion โลชั…", "price_str": "฿49", "price": 49.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5791768859.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5041251806.jpg"}, {"rank": 3, "name": "การ์นิเย่ บอดี้ ไบร์ท คอ…", "price_str": "฿48", "price": 48.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5793538220.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4448026530.jpg"}, {"rank": 4, "name": "Citra โลชั่นบำรุงผิวกาย …", "price_str": "฿64", "price": 64.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5812634333.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5232159280.jpg"}, {"rank": 5, "name": "Mistine มิสทีน บอดี้โลชั…", "price_str": "฿59", "price": 59.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i3355683894.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5911783058.jpg"}]}, {"key": "shoes_20260430", "mode": "bestseller", "title": "5 รองเท้าขายดี", "keyword": "รองเท้า", "date": "30/04/2026", "updated": "2026-04-30T22:23:03.006905", "products": [{"rank": 1, "name": "adidas ADIZERO EVO SL รอ…", "price_str": "฿4,668", "price": 4668.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i16053924920.html?t=p-i5WHa7P-sNKs264", "image": "images/item_16053924920.jpg"}, {"rank": 2, "name": "icyรองเท้าแตะ ยางPVC แบบ…", "price_str": "฿54", "price": 54.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5692861121.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5804019329.jpg"}, {"rank": 3, "name": "QDshop จัดส่งในไทยรองเท้…", "price_str": "฿58", "price": 58.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i4717247257.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5692861121.jpg"}, {"rank": 4, "name": "2412 รองเท้าแตะหุ้มข้อ ว…", "price_str": "฿59", "price": 59.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5462786088.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4717247257.jpg"}, {"rank": 5, "name": "icy sport รองเท้าแตะผู้ห…", "price_str": "฿68", "price": 68.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5697715132.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5462786088.jpg"}]}, {"key": "bath_20260430", "mode": "bestseller", "title": "5 ของใช้ห้องน้ำขายดี", "keyword": "ของใช้ห้องน้ำ", "date": "30/04/2026", "updated": "2026-04-30T22:23:03.007038", "products": [{"rank": 1, "name": "ที่ดับกลิ่นชักโครกtoliet", "price_str": "฿7", "price": 7.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5502096651.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5502096651.jpg"}, {"rank": 2, "name": "VINTLOOK ตะขอห้องน้ำลายก…", "price_str": "฿10", "price": 10.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5780796049.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4342638847.jpg"}, {"rank": 3, "name": "น้ำยาขัดห้องน้ำ วิคซอล ข…", "price_str": "฿39", "price": 39.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i4342242752.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5490266015.jpg"}, {"rank": 4, "name": "เป็ดโปร น้ำยาล้างห้องน้ำ…", "price_str": "฿53", "price": 53.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i2004908437.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4877647409.jpg"}, {"rank": 5, "name": "พรมเช็ดเท้า พรมห้องน้ํา …", "price_str": "฿24", "price": 24.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5490266015.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5850796246.jpg"}]}, {"key": "kitchen_20260430", "mode": "bestseller", "title": "5 อุปกรณ์ครัวขายดี", "keyword": "อุปกรณ์ครัว", "date": "30/04/2026", "updated": "2026-04-30T22:23:03.007168", "products": [{"rank": 1, "name": "เครื่องครัว ตะหลิวซิลิโค…", "price_str": "฿50", "price": 50.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i6017564169.html?t=p-i5WHa7P-sNKs264", "image": "images/item_6017564169.jpg"}, {"rank": 2, "name": "ตะหลิวซิลิโคน เครื่องครั…", "price_str": "฿22", "price": 22.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i4101624275.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5140429464.jpg"}, {"rank": 3, "name": "ชุดเครื่องครัวซิลิโคน ชุ…", "price_str": "฿20", "price": 20.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5858163180.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4101624275.jpg"}, {"rank": 4, "name": "ตะหลิวซิลิโคน เชุดครื่อง…", "price_str": "฿17", "price": 17.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i4891249746.html?t=p-i5WHa7P-sNKs264", "image": "images/item_5088313454.jpg"}, {"rank": 5, "name": "SZX 50*10cm ตะหลิว กระบว…", "price_str": "฿42", "price": 42.0, "sold": "", "url": "https://www.lazada.co.th/products/pdp-i5104044885.html?t=p-i5WHa7P-sNKs264", "image": "images/item_4891249746.jpg"}]}];
-const MODE_META = {"bestseller": {"emoji": "🔥", "label": "ขายดีอันดับต้น", "color": "#ff4444"}, "cheapest": {"emoji": "💸", "label": "ราคาถูกสุด", "color": "#00b894"}, "expensive": {"emoji": "✨", "label": "พรีเมียม", "color": "#fdcb6e"}, "toprated": {"emoji": "⭐", "label": "คะแนนดีสุด", "color": "#a29bfe"}, "newest": {"emoji": "🆕", "label": "มาใหม่ล่าสุด", "color": "#00cec9"}, "collectible": {"emoji": "🎖️", "label": "ของสะสมสุดเจ๋ง", "color": "#e17055"}, "limited": {"emoji": "🔖", "label": "ของลิมิเต็ด", "color": "#6c5ce7"}, "health": {"emoji": "💊", "label": "สุขภาพแนะนำ", "color": "#55efc4"}, "gadget": {"emoji": "🤖", "label": "แกดเจ็ตน่าซื้อ", "color": "#74b9ff"}, "beauty": {"emoji": "💄", "label": "ของแต่งหน้าขายดี", "color": "#fd79a8"}, "home": {"emoji": "🏠", "label": "ของแต่งบ้านสุดคุ้ม", "color": "#81ecec"}, "pet": {"emoji": "🐾", "label": "สัตว์เลี้ยงแนะนำ", "color": "#fab1a0"}, "kids": {"emoji": "🧸", "label": "ของเล่นเด็กยอดนิยม", "color": "#ffeaa7"}, "skincare": {"emoji": "🧴", "label": "สกินแคร์", "color": "#fd79a8"}, "food": {"emoji": "🍜", "label": "ของกินขายดี", "color": "#e17055"}, "sport": {"emoji": "🏋️", "label": "อุปกรณ์กีฬา", "color": "#00b894"}, "office": {"emoji": "💻", "label": "ทำงานที่บ้าน", "color": "#74b9ff"}, "fashion": {"emoji": "👗", "label": "แฟชั่น", "color": "#a29bfe"}, "custom": {"emoji": "🛒", "label": "สินค้าแนะนำ", "color": "#b2bec3"}};
-let activeMode = 'all';
-let activeDate = 'all';
+(function () {
+  "use strict";
 
-// Build mode filter tabs
-function buildTabs() {
-  const tabs = document.getElementById('tabs');
-  const modes = [...new Set(GROUPS.map(g => g.mode))];
-  modes.forEach(mode => {
-    const m = MODE_META[mode] || {};
-    const btn = document.createElement('button');
-    btn.className = 'tab';
-    btn.textContent = (m.emoji || '') + ' ' + (m.label || mode);
-    btn.onclick = () => filterMode(mode, btn);
-    tabs.appendChild(btn);
-  });
-}
+  /* ============ default tax-year definitions ============ */
+  var BRACKETS = [
+    { upTo: 150000, rate: 0 }, { upTo: 300000, rate: 5 }, { upTo: 500000, rate: 10 },
+    { upTo: 750000, rate: 15 }, { upTo: 1000000, rate: 20 }, { upTo: 2000000, rate: 25 },
+    { upTo: 5000000, rate: 30 }, { upTo: null, rate: 35 }
+  ];
 
-// Build date filter tabs
-function buildDateTabs() {
-  const tabs = document.getElementById('date-tabs');
-  // Parse dd/MM/yyyy → sortable yyyyMMdd
-  const parseDate = d => { const [dd,mm,yyyy] = d.split('/'); return yyyy+mm+dd; };
-  const dates = [...new Set(GROUPS.map(g => g.date))]
-    .sort((a,b) => parseDate(b).localeCompare(parseDate(a)));
-  dates.forEach(date => {
-    const btn = document.createElement('button');
-    btn.className = 'tab date-tab';
-    // show as "27 เม.ย." format
-    const [dd,mm,yyyy] = date.split('/');
-    const thMonths = ['','ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
-    btn.textContent = dd + ' ' + (thMonths[parseInt(mm)] || mm);
-    btn.onclick = () => filterDate(date, btn);
-    tabs.appendChild(btn);
-  });
-}
-
-// Build product card HTML
-function cardHTML(p, color) {
-  const rankColor = color || '#ff4444';
-  const imgSrc = p.image || '';
-  const imgEl = imgSrc
-    ? `<img class="card-img" src="${imgSrc}" alt="${p.name}" loading="lazy"
-         onerror="this.outerHTML='<div class=\'card-img error\'>📦</div>'">`
-    : `<div class="card-img error">📦</div>`;
-
-  const btnEl = p.url
-    ? `<a class="card-btn" href="${p.url}" target="_blank" rel="nofollow noopener">ดูสินค้า →</a>`
-    : `<span class="card-btn no-link">ไม่มีลิ้งก์</span>`;
-
-  return `
-    <div class="card" data-name="${p.name.toLowerCase()}" data-mode="">
-      ${imgEl}
-      <div class="rank-badge" style="background:${rankColor}">#${p.rank}</div>
-      <div class="card-body">
-        <div class="card-name">${p.name}</div>
-        <div class="card-price">${p.price_str}</div>
-        ${p.sold ? `<div class="card-sold">${p.sold}</div>` : ''}
-        ${btnEl}
-      </div>
-    </div>`;
-}
-
-// Render all groups
-function renderGroups(groups) {
-  const main = document.getElementById('main');
-  if (!groups.length) {
-    main.innerHTML = `<div class="empty"><div class="empty-icon">📦</div><div>ยังไม่มีสินค้า</div></div>`;
-    return;
-  }
-  main.innerHTML = groups.map(g => {
-    const m = MODE_META[g.mode] || {};
-    const color = m.color || '#ff4444';
-    const cards = g.products.map(p => cardHTML(p, color)).join('');
-    return `
-      <div class="group" data-mode="${g.mode}">
-        <div class="group-header">
-          <span class="group-emoji">${m.emoji || '🛒'}</span>
-          <div>
-            <div class="group-title">${g.title}</div>
-            <span class="group-keyword">${g.keyword || g.mode}</span>
-          </div>
-          <div class="group-meta">
-            ${g.date}<br>
-            <span style="color:${color}">${m.label || g.mode}</span>
-          </div>
-        </div>
-        <div class="grid">${cards}</div>
-      </div>`;
-  }).join('');
-}
-
-function filterMode(mode, el) {
-  activeMode = mode;
-  document.querySelectorAll('#tabs .tab').forEach(t => t.classList.remove('active'));
-  if (el) el.classList.add('active');
-  filterAll();
-}
-
-function filterDate(date, el) {
-  activeDate = date;
-  document.querySelectorAll('#date-tabs .tab').forEach(t => t.classList.remove('active'));
-  if (el) el.classList.add('active');
-  filterAll();
-}
-
-function filterAll() {
-  const q = document.getElementById('search').value.toLowerCase().trim();
-  const groups = GROUPS.filter(g =>
-    (activeMode === 'all' || g.mode === activeMode) &&
-    (activeDate === 'all' || g.date === activeDate)
-  );
-
-  let filteredGroups;
-  if (!q) {
-    filteredGroups = groups;
-  } else {
-    filteredGroups = groups.map(g => ({
-      ...g,
-      products: g.products.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        g.title.toLowerCase().includes(q) ||
-        (g.keyword || '').toLowerCase().includes(q)
-      )
-    })).filter(g => g.products.length > 0);
+  function baseDeductions() {
+    return [
+      { id: "personal", label: "ลดหย่อนส่วนตัว", hint: "ได้อัตโนมัติทุกคน", cap: 60000, fixed: true },
+      { id: "spouse", label: "คู่สมรสไม่มีเงินได้", cap: 60000 },
+      { id: "child1", label: "บุตร", hint: "คนละ 30,000", per: 30000, maxUnits: 20 },
+      { id: "child2", label: "บุตรคนที่ 2 ขึ้นไป ที่เกิดตั้งแต่ปี 2561", hint: "คนละ 60,000 นับเฉพาะบุตรที่เข้าเงื่อนไข อย่านับซ้ำกับช่องบน", per: 60000, maxUnits: 20 },
+      { id: "parents", label: "บิดามารดา อายุ 60 ปีขึ้นไป", hint: "คนละ 30,000 ไม่เกิน 4 คน", per: 30000, maxUnits: 4 },
+      { id: "disabled", label: "อุปการะคนพิการหรือทุพพลภาพ", hint: "คนละ 60,000", per: 60000, maxUnits: 10 },
+      { id: "prenatal", label: "ค่าฝากครรภ์และค่าคลอดบุตร", cap: 60000 },
+      { id: "sso", label: "ประกันสังคม", cap: 9000 },
+      { id: "life", label: "เบี้ยประกันชีวิต", cap: 100000, group: "life" },
+      { id: "health", label: "เบี้ยประกันสุขภาพตนเอง", hint: "รวมกับประกันชีวิตไม่เกิน 100,000", cap: 25000, group: "life" },
+      { id: "healthParent", label: "เบี้ยประกันสุขภาพบิดามารดา", cap: 15000 },
+      { id: "pension", label: "เบี้ยประกันชีวิตแบบบำนาญ", cap: 200000, pct: 15, group: "retire" },
+      { id: "pvd", label: "กองทุนสำรองเลี้ยงชีพ / กบข. / สงเคราะห์ครู", cap: 500000, pct: 15, group: "retire" },
+      { id: "rmf", label: "RMF", cap: 500000, pct: 30, group: "retire" },
+      { id: "nsf", label: "กองทุนการออมแห่งชาติ (กอช.)", cap: 30000, group: "retire" },
+      { id: "thaiesg", label: "Thai ESG / Thai ESGX", cap: 300000, pct: 30 },
+      { id: "homeloan", label: "ดอกเบี้ยกู้ยืมเพื่อที่อยู่อาศัย", cap: 100000 },
+      { id: "party", label: "เงินบริจาคพรรคการเมือง", cap: 10000 },
+      { id: "elder", label: "ยกเว้นเงินได้ ผู้มีอายุ 65 ปีขึ้นไป หรือผู้พิการ", cap: 190000 }
+    ];
   }
 
-  if (activeDate === 'all') {
-    filteredGroups = [...filteredGroups].sort((a, b) => {
-      const parse = d => { const [dd,mm,yy] = d.split('/'); return new Date(yy,mm-1,dd); };
-      return parse(b.date) - parse(a.date);
+  var DEFAULTS = {
+    2568: {
+      label: "ปีภาษี 2568 (ยื่นต้นปี 2569)",
+      brackets: BRACKETS,
+      expense: { rate: 50, cap: 100000 },
+      groupCaps: { retire: 500000, life: 100000 },
+      deductions: baseDeductions().concat([
+        { id: "easyereceipt", label: "Easy E-Receipt 2.0", hint: "มาตรการกระตุ้นการใช้จ่ายต้นปี", cap: 50000 }
+      ])
+    },
+    2567: {
+      label: "ปีภาษี 2567 (ยื่นต้นปี 2568)",
+      brackets: BRACKETS,
+      expense: { rate: 50, cap: 100000 },
+      groupCaps: { retire: 500000, life: 100000 },
+      deductions: baseDeductions().concat([
+        { id: "ssf", label: "SSF", hint: "ปี 2567 เป็นปีสุดท้ายของมาตรการ", cap: 200000, pct: 30, group: "retire" },
+        { id: "easyereceipt", label: "Easy E-Receipt", cap: 50000 },
+        { id: "secondarytrip", label: "ค่าท่องเที่ยวเมืองรอง", cap: 15000 }
+      ])
+    }
+  };
+
+  var INCOME_FIELDS = [
+    { id: "salary", label: "เงินเดือน โบนัส และค่าจ้างทั้งปี", hint: "เงินได้ประเภทที่ 1 และ 2 ก่อนหักอะไรทั้งสิ้น" },
+    { id: "other", label: "เงินได้อื่นที่หักค่าใช้จ่ายแล้ว", hint: "เช่น ค่าเช่า ฟรีแลนซ์ ธุรกิจ ใส่ยอดสุทธิหลังหักค่าใช้จ่าย" }
+  ];
+
+  var CFG_KEY = "thai-tax-config-v1", IN_KEY = "thai-tax-inputs-v1", YR_KEY = "thai-tax-year-v1";
+
+  /* ============ state ============ */
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function load(k, fb) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : fb; } catch (e) { return fb; } }
+  function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+
+  var config = load(CFG_KEY, null) || clone(DEFAULTS);
+  var inputs = load(IN_KEY, null) || {};
+  var year = String(load(YR_KEY, null) || Object.keys(config).sort().reverse()[0]);
+  if (!config[year]) year = Object.keys(config).sort().reverse()[0];
+
+  function yr() { return config[year]; }
+  function inp() { inputs[year] = inputs[year] || {}; return inputs[year]; }
+  function val(id) { var n = parseFloat(inp()[id]); return isFinite(n) && n > 0 ? n : 0; }
+
+  /* ============ formatting ============ */
+  var nf0 = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+  var nf2 = new Intl.NumberFormat("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  function fmt(n) { return nf0.format(Math.round(n || 0)); }
+  function fmt2(n) { return nf2.format(n || 0); }
+
+  /* ============ calculation ============ */
+  function calc() {
+    var y = yr();
+    var salary = val("salary"), other = val("other");
+    var assessable = salary + other;
+    var expense = Math.min(salary * (y.expense.rate / 100), y.expense.cap);
+
+    var groupUsed = {}, lines = [], dedTotal = 0;
+    y.deductions.forEach(function (d) {
+      if (d.off) return;
+      var raw;
+      if (d.fixed) raw = d.cap;
+      else if (d.per) raw = val(d.id) * d.per;
+      else raw = val(d.id);
+
+      var limit = Infinity;
+      if (d.per && d.maxUnits) limit = d.maxUnits * d.per;
+      if (typeof d.cap === "number") limit = Math.min(limit, d.cap);
+      if (d.pct) limit = Math.min(limit, assessable * (d.pct / 100));
+
+      var allowed = Math.min(raw, limit);
+      if (d.group) {
+        var gcap = (y.groupCaps && y.groupCaps[d.group]) || Infinity;
+        var used = groupUsed[d.group] || 0;
+        allowed = Math.min(allowed, Math.max(0, gcap - used));
+        groupUsed[d.group] = used + allowed;
+      }
+      dedTotal += allowed;
+      lines.push({ d: d, raw: raw, allowed: allowed, trimmed: raw - allowed > 0.5 });
+    });
+
+    var beforeDonation = Math.max(0, assessable - expense - dedTotal);
+    var donCap = beforeDonation * 0.10;
+    var edu = Math.min(val("donEdu") * 2, donCap);
+    var gen = Math.min(val("donGen"), Math.max(0, donCap - edu));
+    var taxable = Math.max(0, beforeDonation - edu - gen);
+
+    var steps = [], tax = 0, lower = 0;
+    y.brackets.forEach(function (b) {
+      var upper = (b.upTo === null || b.upTo === "" || b.upTo === undefined) ? Infinity : Number(b.upTo);
+      var portion = Math.max(0, Math.min(taxable, upper) - lower);
+      var t = portion * (b.rate / 100);
+      tax += t;
+      steps.push({ rate: b.rate, lower: lower, upper: upper, portion: portion, tax: t });
+      lower = upper;
+    });
+
+    var paid = val("paid");
+    return {
+      assessable: assessable, expense: expense, dedTotal: dedTotal, lines: lines,
+      donation: edu + gen, donCap: donCap, taxable: taxable, tax: tax, steps: steps,
+      paid: paid, settle: tax - paid,
+      effective: assessable > 0 ? (tax / assessable) * 100 : 0
+    };
+  }
+
+  /* ============ input row helper ============ */
+  function amountRow(id, label, hint, opts) {
+    opts = opts || {};
+    var row = document.createElement("div");
+    row.className = "row";
+    var lbl = document.createElement("span");
+    lbl.className = "lbl";
+    lbl.innerHTML = "<b></b>";
+    lbl.querySelector("b").textContent = label;
+    if (hint) { var s = document.createElement("small"); s.textContent = hint; lbl.appendChild(s); }
+    var lead = document.createElement("span"); lead.className = "lead";
+    var fld = document.createElement("span"); fld.className = "fld";
+
+    var input = document.createElement("input");
+    input.className = "amt" + (opts.count ? " count" : "");
+    input.type = "text";
+    input.inputMode = "numeric";
+    input.id = "f_" + id;
+    input.setAttribute("aria-label", label);
+    var stored = inp()[id];
+    input.value = stored ? fmt(stored) : "";
+    input.placeholder = opts.count ? "0" : "0";
+
+    input.addEventListener("input", function () {
+      var n = parseFloat(input.value.replace(/[^0-9.]/g, ""));
+      inp()[id] = isFinite(n) ? n : 0;
+      save(IN_KEY, inputs);
+      render(true);
+    });
+    input.addEventListener("blur", function () {
+      var n = parseFloat(String(input.value).replace(/[^0-9.]/g, ""));
+      input.value = isFinite(n) && n > 0 ? fmt(n) : "";
+    });
+
+    fld.appendChild(input);
+    if (opts.unit) { var u = document.createElement("span"); u.className = "unit"; u.textContent = opts.unit; fld.appendChild(u); }
+    row.appendChild(lbl); row.appendChild(lead); row.appendChild(fld);
+    return row;
+  }
+
+  /* ============ render: calc tab ============ */
+  function renderInputs() {
+    var y = yr();
+    document.getElementById("expenseNote").textContent =
+      "เงินเดือนหักค่าใช้จ่ายได้ " + y.expense.rate + "% ไม่เกิน " + fmt(y.expense.cap) + " บาท ระบบหักให้อัตโนมัติ";
+
+    var ir = document.getElementById("incomeRows"); ir.innerHTML = "";
+    INCOME_FIELDS.forEach(function (f) { ir.appendChild(amountRow(f.id, f.label, f.hint, { unit: "บาท" })); });
+
+    var dr = document.getElementById("dedRows"); dr.innerHTML = "";
+    y.deductions.forEach(function (d) {
+      if (d.off) return;
+      if (d.fixed) {
+        var row = document.createElement("div");
+        row.className = "row";
+        row.innerHTML = '<span class="lbl"><b></b><small></small></span><span class="lead"></span>' +
+          '<span class="fld"><span class="amt" style="display:inline-block;background:transparent"></span><span class="unit">บาท</span></span>';
+        row.querySelector("b").textContent = d.label;
+        row.querySelector("small").textContent = d.hint || "";
+        row.querySelector(".amt").textContent = fmt(d.cap);
+        dr.appendChild(row);
+        return;
+      }
+      var unit = d.unit || (d.per ? "คน" : "บาท");
+      var hint = d.hint || "";
+      if (!hint) {
+        var bits = [];
+        if (d.per) bits.push(fmt(d.per) + " ต่อ " + unit);
+        if (typeof d.cap === "number") bits.push("ไม่เกิน " + fmt(d.cap));
+        if (d.pct) bits.push("ไม่เกิน " + d.pct + "% ของเงินได้");
+        hint = bits.join(" · ");
+      }
+      dr.appendChild(amountRow(d.id, d.label, hint, { count: !!d.per, unit: unit }));
+    });
+
+    var dn = document.getElementById("donRows"); dn.innerHTML = "";
+    dn.appendChild(amountRow("donEdu", "บริจาคการศึกษา กีฬา โรงพยาบาลรัฐ", "หักได้ 2 เท่าของยอดบริจาค", { unit: "บาท" }));
+    dn.appendChild(amountRow("donGen", "บริจาคทั่วไป", "สาธารณกุศลอื่น หักได้ตามจ่ายจริง", { unit: "บาท" }));
+
+    var pr = document.getElementById("paidRows"); pr.innerHTML = "";
+    pr.appendChild(amountRow("paid", "ภาษีหัก ณ ที่จ่าย และภาษีที่ชำระแล้ว", "", { unit: "บาท" }));
+  }
+
+  function renderSummary() {
+    var r = calc();
+
+    document.getElementById("taxBig").textContent = fmt2(r.tax);
+    document.getElementById("taxBig").classList.toggle("warn", r.tax > 0 && r.settle > 0);
+    document.getElementById("effRate").textContent = "อัตราภาษีที่แท้จริง " + r.effective.toFixed(2) + "% ของเงินได้";
+
+    var pill = document.getElementById("settlePill"), amt = document.getElementById("settleAmt");
+    if (r.settle > 0.5) { pill.textContent = "ต้องจ่ายเพิ่ม"; pill.className = "pill warn"; amt.textContent = fmt2(r.settle); }
+    else if (r.settle < -0.5) { pill.textContent = "ขอคืนได้"; pill.className = "pill"; amt.textContent = fmt2(-r.settle); }
+    else { pill.textContent = "ไม่มียอดค้าง"; pill.className = "pill"; amt.textContent = "0.00"; }
+
+    var b = document.getElementById("breakdown");
+    var rows = [
+      ["เงินได้พึงประเมิน", r.assessable],
+      ["หัก ค่าใช้จ่าย", -r.expense],
+      ["หัก ค่าลดหย่อน", -r.dedTotal],
+      ["หัก เงินบริจาค", -r.donation]
+    ];
+    b.innerHTML = "";
+    rows.forEach(function (x) {
+      var d = document.createElement("div"); d.className = "kv";
+      d.innerHTML = '<span class="k"></span><span class="d"></span><span class="v"></span>';
+      d.querySelector(".k").textContent = x[0];
+      d.querySelector(".v").textContent = (x[1] < 0 ? "−" : "") + fmt(Math.abs(x[1]));
+      b.appendChild(d);
+    });
+    var t = document.createElement("div"); t.className = "kv total";
+    t.innerHTML = '<span class="k">เงินได้สุทธิที่ต้องเสียภาษี</span><span class="d"></span><span class="v"></span>';
+    t.querySelector(".v").textContent = fmt(r.taxable);
+    b.appendChild(t);
+
+    var trimmed = r.lines.filter(function (l) { return l.trimmed; });
+    if (trimmed.length) {
+      var note = document.createElement("div");
+      note.style.cssText = "margin-top:12px;font-size:11.5px;color:var(--warn);line-height:1.5";
+      note.textContent = "ตัดตามเพดานแล้ว: " + trimmed.map(function (l) {
+        return l.d.label + " (ใช้ได้ " + fmt(l.allowed) + ")";
+      }).join(" · ");
+      b.appendChild(note);
+    }
+
+    var lad = document.getElementById("ladder");
+    lad.innerHTML = "";
+    var maxPortion = r.steps.reduce(function (m, s) { return Math.max(m, s.portion); }, 0) || 1;
+    r.steps.forEach(function (s, i) {
+      var el = document.createElement("div");
+      el.className = "step" + (s.portion <= 0 ? " idle" : "");
+        var f = i / Math.max(1, r.steps.length - 1);
+      var dark = getComputedStyle(document.documentElement).getPropertyValue("--is-dark").trim() === "1";
+      var shade = dark ? 28 + f * 34 : 56 - f * 32;
+      var range = fmt(s.lower + (i === 0 ? 0 : 1)) + (s.upper === Infinity ? " ขึ้นไป" : "–" + fmt(s.upper));
+      el.innerHTML =
+        '<span class="rate"></span>' +
+        '<span class="track"><span class="fill"></span><span class="range"></span></span>' +
+        '<span class="tax"></span>';
+      el.querySelector(".rate").textContent = s.rate + "%";
+      el.querySelector(".range").textContent = range;
+      el.querySelector(".tax").textContent = fmt(s.tax);
+      var fill = el.querySelector(".fill");
+      fill.style.width = (s.portion / maxPortion * 100) + "%";
+      fill.style.background = s.rate === 0 ? "var(--line-2)" : "hsl(158 46% " + shade + "%)";
+      lad.appendChild(el);
     });
   }
 
-  renderGroups(filteredGroups);
-  document.getElementById('no-results').style.display =
-    filteredGroups.length === 0 && q ? 'block' : 'none';
-}
+  /* ============ render: settings tab ============ */
+  function settingRow(container, cells) {
+    var tr = document.createElement("tr");
+    cells.forEach(function (c) { var td = document.createElement("td"); if (c) td.appendChild(c); tr.appendChild(td); });
+    container.appendChild(tr);
+    return tr;
+  }
+  function numInput(value, onChange, cls) {
+    var i = document.createElement("input");
+    i.type = "text";
+    i.className = cls || "";
+    i.value = (value === null || value === undefined || value === "") ? "" : value;
+    i.addEventListener("change", function () {
+      var raw = i.value.replace(/[^0-9.]/g, "");
+      onChange(raw === "" ? null : parseFloat(raw));
+      persistConfig();
+    });
+    return i;
+  }
+  function textInput(value, onChange) {
+    var i = document.createElement("input");
+    i.type = "text"; i.className = "txt"; i.value = value || "";
+    i.addEventListener("change", function () { onChange(i.value); persistConfig(); });
+    return i;
+  }
+  function delBtn(fn) {
+    var b = document.createElement("button");
+    b.className = "x"; b.type = "button"; b.textContent = "×"; b.title = "ลบแถวนี้";
+    b.addEventListener("click", function () { fn(); persistConfig(); });
+    return b;
+  }
+  function persistConfig() { save(CFG_KEY, config); render(); }
 
-// Init
-buildTabs();
-buildDateTabs();
-filterAll();
+  function renderSettings() {
+    var y = yr();
+
+    var bt = document.querySelector("#brTbl tbody"); bt.innerHTML = "";
+    y.brackets.forEach(function (b, i) {
+      settingRow(bt, [
+        numInput(b.upTo === null ? "" : b.upTo, function (v) { b.upTo = v; }),
+        numInput(b.rate, function (v) { b.rate = v || 0; }),
+        delBtn(function () { y.brackets.splice(i, 1); })
+      ]);
+    });
+
+    document.getElementById("expRate").value = y.expense.rate;
+    document.getElementById("expCap").value = fmt(y.expense.cap);
+    document.getElementById("retireCap").value = fmt((y.groupCaps && y.groupCaps.retire) || 0);
+    document.getElementById("lifeCap").value = fmt((y.groupCaps && y.groupCaps.life) || 0);
+
+    var dt = document.querySelector("#dedTbl tbody"); dt.innerHTML = "";
+    y.deductions.forEach(function (d, i) {
+      var on = document.createElement("input");
+      on.type = "checkbox";
+      on.checked = !d.off;
+      on.title = "เปิดหรือปิดรายการนี้";
+      on.setAttribute("aria-label", "ใช้รายการ " + d.label);
+      on.addEventListener("change", function () { d.off = on.checked ? undefined : true; persistConfig(); });
+
+      var group = document.createElement("input");
+      group.type = "text"; group.className = "txt"; group.value = d.group || "";
+      group.placeholder = "—";
+      group.addEventListener("change", function () {
+        d.group = group.value.trim() || undefined; persistConfig();
+      });
+
+      var unit = document.createElement("input");
+      unit.type = "text"; unit.className = "txt"; unit.value = d.unit || "";
+      unit.placeholder = d.per ? "คน" : "บาท";
+      unit.addEventListener("change", function () {
+        d.unit = unit.value.trim() || undefined; persistConfig();
+      });
+
+      var tr = settingRow(dt, [
+        on,
+        textInput(d.label, function (v) { d.label = v; }),
+        numInput(typeof d.cap === "number" ? d.cap : "", function (v) { d.cap = v === null ? undefined : v; }),
+        numInput(d.pct || "", function (v) { d.pct = v === null ? undefined : v; }),
+        numInput(d.per || "", function (v) { d.per = v === null ? undefined : v; }),
+        unit,
+        group,
+        delBtn(function () { y.deductions.splice(i, 1); })
+      ]);
+      if (d.off) tr.className = "off";
+    });
+  }
+
+  /* ============ wiring ============ */
+  function renderYearSelect() {
+    var sel = document.getElementById("yearSel");
+    sel.innerHTML = "";
+    Object.keys(config).sort().reverse().forEach(function (k) {
+      var o = document.createElement("option");
+      o.value = k; o.textContent = config[k].label || ("ปีภาษี " + k);
+      sel.appendChild(o);
+    });
+    sel.value = year;
+    document.getElementById("newYear").placeholder = String(Number(year) + 1);
+  }
+
+  var rafPending = false;
+  function render(summaryOnly) {
+    if (summaryOnly) {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(function () { rafPending = false; renderSummary(); });
+      return;
+    }
+    renderYearSelect();
+    renderInputs();
+    renderSummary();
+    renderSettings();
+  }
+
+  document.getElementById("yearSel").addEventListener("change", function (e) {
+    year = e.target.value; save(YR_KEY, year); render();
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) {
+    t.addEventListener("click", function () {
+      Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (o) {
+        o.setAttribute("aria-selected", String(o === t));
+      });
+      document.getElementById("tab-calc").classList.toggle("hide", t.dataset.tab !== "calc");
+      document.getElementById("tab-settings").classList.toggle("hide", t.dataset.tab !== "settings");
+    });
+  });
+
+  document.getElementById("expRate").addEventListener("change", function (e) {
+    yr().expense.rate = parseFloat(e.target.value.replace(/[^0-9.]/g, "")) || 0; persistConfig();
+  });
+  document.getElementById("expCap").addEventListener("change", function (e) {
+    yr().expense.cap = parseFloat(e.target.value.replace(/[^0-9.]/g, "")) || 0; persistConfig();
+  });
+  document.getElementById("retireCap").addEventListener("change", function (e) {
+    yr().groupCaps.retire = parseFloat(e.target.value.replace(/[^0-9.]/g, "")) || 0; persistConfig();
+  });
+  document.getElementById("lifeCap").addEventListener("change", function (e) {
+    yr().groupCaps.life = parseFloat(e.target.value.replace(/[^0-9.]/g, "")) || 0; persistConfig();
+  });
+
+  document.getElementById("addBr").addEventListener("click", function () {
+    yr().brackets.push({ upTo: null, rate: 0 }); persistConfig();
+  });
+  document.getElementById("addDed").addEventListener("click", function () {
+    yr().deductions.push({ id: "custom" + Date.now(), label: "รายการใหม่", cap: 0 }); persistConfig();
+  });
+
+  var msgEl = document.getElementById("setMsg");
+  function say(text, isWarn) {
+    msgEl.textContent = text;
+    msgEl.className = "msg" + (isWarn ? " warn" : "");
+  }
+
+  /* two-step confirm: first click arms the button, second click within 5s runs it */
+  function arm(btn, armedLabel, run) {
+    var idle = btn.textContent, timer = null;
+    function disarm() { btn.textContent = idle; btn.classList.remove("arm"); timer = null; }
+    btn.addEventListener("click", function () {
+      if (timer) { clearTimeout(timer); disarm(); run(); return; }
+      btn.textContent = armedLabel;
+      btn.classList.add("arm");
+      say("กดอีกครั้งเพื่อยืนยัน", true);
+      timer = setTimeout(function () { disarm(); say(""); }, 5000);
+    });
+  }
+
+  document.getElementById("cloneYear").addEventListener("click", function () {
+    var box = document.getElementById("newYear");
+    var name = String(box.value).replace(/[^0-9]/g, "").trim();
+    if (!name) { say("ใส่ปี พ.ศ. ที่ต้องการก่อน เช่น " + (Number(year) + 1), true); box.focus(); return; }
+    if (config[name]) { say("มีปีภาษี " + name + " อยู่แล้ว เลือกจากช่องปีภาษีด้านบนได้เลย", true); return; }
+    config[name] = clone(yr());
+    config[name].label = "ปีภาษี " + name;
+    year = name; box.value = ""; save(YR_KEY, year); persistConfig();
+    say("สร้างปีภาษี " + name + " จากค่าของปีเดิมแล้ว ปรับตัวเลขด้านบนได้เลย");
+  });
+
+  arm(document.getElementById("resetYear"), "ยืนยันคืนค่า", function () {
+    if (!DEFAULTS[year]) { say("ปีภาษี " + year + " เป็นปีที่สร้างเอง ไม่มีค่าตั้งต้นให้คืน ใช้ปุ่มลบปีแทนได้", true); return; }
+    config[year] = clone(DEFAULTS[year]); persistConfig();
+    say("คืนค่าปีภาษี " + year + " เป็นค่าตั้งต้นแล้ว");
+  });
+
+  arm(document.getElementById("deleteYear"), "ยืนยันลบ", function () {
+    if (Object.keys(config).length < 2) { say("ต้องเหลืออย่างน้อยหนึ่งปีภาษี", true); return; }
+    var gone = year;
+    delete config[year]; delete inputs[year];
+    year = Object.keys(config).sort().reverse()[0];
+    save(IN_KEY, inputs); save(YR_KEY, year); persistConfig();
+    say("ลบปีภาษี " + gone + " แล้ว");
+  });
+
+  document.getElementById("exportBtn").addEventListener("click", function () {
+    var blob = new Blob([JSON.stringify({ config: config, inputs: inputs }, null, 2)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "thai-tax-settings.json";
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+  });
+  document.getElementById("importBtn").addEventListener("click", function () {
+    document.getElementById("importFile").click();
+  });
+  document.getElementById("importFile").addEventListener("change", function (e) {
+    var f = e.target.files[0]; if (!f) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      try {
+        var data = JSON.parse(reader.result);
+        if (!data.config) throw new Error("bad");
+        config = data.config;
+        inputs = data.inputs || {};
+        year = Object.keys(config).sort().reverse()[0];
+        save(IN_KEY, inputs); save(YR_KEY, year); persistConfig();
+        say("โหลดไฟล์ตั้งค่าเรียบร้อย");
+      } catch (err) {
+        say("ไฟล์นี้อ่านไม่ได้ ต้องเป็นไฟล์ตั้งค่าที่บันทึกจากปุ่มด้านซ้าย", true);
+      }
+      e.target.value = "";
+    };
+    reader.readAsText(f);
+  });
+
+  render();
+})();
 </script>
-</body>
-</html>
